@@ -26,6 +26,7 @@ import { ApiResponseInterceptor } from './shared/interceptors';
   imports: [
     CqrsModule.forRoot(),
     ConfigModule.forRoot({
+      envFilePath: '../../.env',
       isGlobal: true
     }),
     ThrottlerModule.forRoot({
@@ -82,7 +83,8 @@ import { ApiResponseInterceptor } from './shared/interceptors';
               : undefined
         },
         defaults: {
-          from: config.get('MAIL_FROM') || `nx-stack Support <${config.get('MAIL_USERNAME') || 'support@nx-stack.local'}>`
+          from:
+            config.get('MAIL_FROM') || `nx-stack Support <${config.get('MAIL_USERNAME') || 'support@nx-stack.local'}>`
         }
       })
     }),

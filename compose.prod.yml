@@ -6,7 +6,7 @@ services:
       context: .
       target: api-production
     restart: unless-stopped
-    env_file: ./apps/api/.env
+    env_file: .env
     environment:
       PORT: 8000
       DB_HOST: db

@@ -7,18 +7,43 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig(
-  // Global ignores
-  globalIgnores(['.angular/', 'dist/', '../../libs/api-contracts/src/lib/']),
+  globalIgnores(['.angular/', '.nx/', 'dist/', 'out-tsc/', 'coverage/', 'libs/api-contracts/src/lib/']),
 
-  // Base configs
-  eslint.configs.recommended,
-
-  // Unused imports
   {
+    files: ['**/*.{js,mjs,cjs,ts}'],
+    extends: [eslint.configs.recommended],
+    languageOptions: {
+      globals: globals.node
+    }
+  },
+
+  {
+    files: ['**/*.ts'],
+    extends: [tseslint.configs.recommended]
+  },
+
+  {
+    files: ['apps/web/**/*.ts'],
+    extends: [
+      tseslint.configs.stylistic,
+      angular.configs.tsRecommended,
+      jsdoc.configs['flat/contents-typescript'],
+      jsdoc.configs['flat/logical-typescript'],
+      jsdoc.configs['flat/stylistic-typescript']
+    ],
     plugins: {
       'unused-imports': unusedImports
     },
+    languageOptions: {
+      globals: globals.browser,
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname
+      }
+    },
+    processor: angular.processInlineTemplates,
     rules: {
+      '@typescript-eslint/no-unused-vars': 'off',
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': [
         'warn',
@@ -28,37 +53,7 @@ export default defineConfig(
           args: 'after-used',
           argsIgnorePattern: '^_'
         }
-      ]
-    }
-  },
-
-  // Typescript
-  {
-    files: ['**/*.ts'],
-    extends: [
-      tseslint.configs.recommended,
-      tseslint.configs.stylistic,
-      angular.configs.tsRecommended,
-      jsdoc.configs['flat/contents-typescript'],
-      jsdoc.configs['flat/logical-typescript'],
-      jsdoc.configs['flat/stylistic-typescript']
-    ],
-    languageOptions: {
-      globals: {
-        ...globals.node,
-        ...globals.browser
-      },
-      parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname
-      }
-    },
-    processor: angular.processInlineTemplates,
-    rules: {
-      // Turn off no-unused-vars as it conflicts with unused-imports
-      '@typescript-eslint/no-unused-vars': 'off',
-
-      // Angular
+      ],
       '@angular-eslint/component-selector': [
         'error',
         {
@@ -81,15 +76,20 @@ export default defineConfig(
     }
   },
 
-  // HTML
   {
-    files: ['**/*.html'],
+    files: ['apps/web/**/*.html'],
     extends: [angular.configs.templateRecommended, angular.configs.templateAccessibility]
   },
 
-  // Test files
   {
-    files: ['**/*.spec.ts'],
+    files: ['apps/api/test/**/*.ts'],
+    rules: {
+      '@typescript-eslint/no-explicit-any': 'off'
+    }
+  },
+
+  {
+    files: ['apps/web/**/*.spec.ts'],
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-unsafe-assignment': 'off',

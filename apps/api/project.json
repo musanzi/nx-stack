@@ -32,8 +32,7 @@
     "lint": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "eslint \"src/**/*.ts\"",
-        "cwd": "apps/api"
+        "command": "eslint \"apps/api/src/**/*.ts\""
       }
     },
     "db-migrate": {

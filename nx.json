@@ -35,7 +35,7 @@
     },
     "lint": {
       "cache": true,
-      "inputs": ["default", "^default"]
+      "inputs": ["default", "^default", "{workspaceRoot}/eslint.config.mjs"]
     },
     "serve": {
       "cache": false

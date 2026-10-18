@@ -3,7 +3,7 @@ import { DataSource } from 'typeorm';
 import { config } from 'dotenv';
 
 config({
-  path: '.env'
+  path: '../../.env'
 });
 
 export default new DataSource({

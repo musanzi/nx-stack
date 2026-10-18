@@ -18,10 +18,10 @@ Requires Node.js 24, pnpm 12.11.2, PostgreSQL 18, and Redis 8. Run commands from
 
 ```sh
 pnpm install --frozen-lockfile
-cp -n apps/api/.env.example apps/api/.env
+cp -n .env.example .env
 ```
 
-Configure database, Redis, session, JWT, SMTP, and Google OAuth values in `apps/api/.env`. For host development, use `DB_HOST=localhost`, `DB_PORT=5432`, `REDIS_URL=redis://localhost:6379`, and `FRONTEND_URI=http://localhost:4200`. Start PostgreSQL and Redis, then run `pnpm dev`.
+Configure database, Redis, session, JWT, SMTP, and Google OAuth values in `.env`. For host development, use `DB_HOST=localhost`, `DB_PORT=5432`, `REDIS_URL=redis://localhost:6379`, and `FRONTEND_URI=http://localhost:4200`. Start PostgreSQL and Redis, then run `pnpm dev`.
 
 Web: http://localhost:4200 · API: http://localhost:8000 · Docs: http://localhost:8000/docs
 
@@ -53,11 +53,11 @@ The web API URL is set at build time in `apps/web/src/environments`: development
 Compose runs both applications, PostgreSQL, and Redis. Development Compose also runs MailHog for local email testing:
 
 ```sh
-docker compose --env-file apps/api/.env -f compose.dev.yml up --build --watch
-docker compose --env-file apps/api/.env -f compose.prod.yml up --build
+docker compose --env-file .env -f compose.dev.yml up --build --watch
+docker compose --env-file .env -f compose.prod.yml up --build
 ```
 
-Compose requires existing external volumes: `nx-stack-api_postgres_data`, `nx-stack-api_redis_data`, and `nx-stack-api_uploads_data`. For a new installation, create them with `docker volume create <name>`. To reuse differently named volumes, set `POSTGRES_VOLUME_NAME`, `REDIS_VOLUME_NAME`, and `UPLOADS_VOLUME_NAME` in `apps/api/.env`.
+Compose requires existing external volumes: `nx-stack-api_postgres_data`, `nx-stack-api_redis_data`, and `nx-stack-api_uploads_data`. For a new installation, create them with `docker volume create <name>`. To reuse differently named volumes, set `POSTGRES_VOLUME_NAME`, `REDIS_VOLUME_NAME`, and `UPLOADS_VOLUME_NAME` in `.env`.
 
 Containers use `DB_HOST=db` and `REDIS_URL=redis://redis:6379`; browsers need a publicly reachable API URL. Both Compose configurations expose web on port 4200 and API on port 8000.
 
@@ -68,12 +68,12 @@ Development Compose routes API email to MailHog at `mailhog:1025` without SMTP a
 For an API running on the host, start MailHog separately:
 
 ```sh
-docker compose --env-file apps/api/.env -f compose.dev.yml up -d mailhog
+docker compose --env-file .env -f compose.dev.yml up -d mailhog
 ```
 
-Set `MAIL_HOST=localhost`, `MAIL_PORT=1025`, `MAIL_USERNAME=`, `MAIL_PASSWORD=`, and `MAIL_FROM=nx-stack Support <support@nx-stack.local>` in `apps/api/.env`, then restart the API. These are the defaults in `.env.example`. MailHog's SMTP and web ports are bound to localhost.
+Set `MAIL_HOST=localhost`, `MAIL_PORT=1025`, `MAIL_USERNAME=`, `MAIL_PASSWORD=`, and `MAIL_FROM=nx-stack Support <support@nx-stack.local>` in `.env`, then restart the API. These are the defaults in `.env.example`. MailHog's SMTP and web ports are bound to localhost.
 
-For production, configure your SMTP provider's host, port, credentials, and sender in `apps/api/.env`. `MAIL_FROM` sets the sender; when omitted, it falls back to `MAIL_USERNAME`.
+For production, configure your SMTP provider's host, port, credentials, and sender in `.env`. `MAIL_FROM` sets the sender; when omitted, it falls back to `MAIL_USERNAME`.
 
 ## License
 
