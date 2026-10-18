@@ -148,7 +148,7 @@ Build and lint results are cached locally under `.nx/cache`; the web project dep
 
 The root Husky pre-commit hook runs `pnpm lint`. Commit messages use the installed Commitlint CLI and Conventional Commits. No test suite, database migration, CI workflow, cloud cache, deployment, or remote publication was added by the repository migration.
 
-This workspace starts with fresh Git history and no remote. The original web checkout, including its Git history, was archived at `/Users/Musanzi/Documents/projects/starter/web-backup-20261018T143440Z`. The original sibling API checkout was left intact.
+This workspace includes both original Git histories, connected to the Nx migration through merge commits. All 23 original web commits and 193 original API commits retain their hashes and original file paths; the migration commits introduce the current `apps/web` and `apps/api` layout. Browse the imported histories through `codex/source-web` and `codex/source-api`. No remote is configured. The original web checkout remains archived at `/Users/Musanzi/Documents/projects/starter/web-backup-20261018T143440Z`, and the original sibling API checkout is unchanged.
 
 ### Migration verification
 
