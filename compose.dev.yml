@@ -12,6 +12,10 @@ services:
       DB_HOST: db
       DB_PORT: 5432
       REDIS_URL: redis://redis:6379
+      MAIL_HOST: mailhog
+      MAIL_PORT: 1025
+      MAIL_USERNAME: ''
+      MAIL_PASSWORD: ''
     ports:
       - '8000:8000'
     volumes:
@@ -21,6 +25,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      mailhog:
+        condition: service_started
     develop:
       watch:
         - action: sync
@@ -55,6 +61,14 @@ services:
           path: ./package.json
         - action: rebuild
           path: ./pnpm-lock.yaml
+
+  mailhog:
+    image: mailhog/mailhog:v1.0.1
+    platform: linux/amd64
+    restart: unless-stopped
+    ports:
+      - '127.0.0.1:1025:1025'
+      - '127.0.0.1:8025:8025'
 
   db:
     image: postgres:18-alpine

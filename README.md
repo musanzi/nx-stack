@@ -54,7 +54,7 @@ Import `components`, `operations`, and `paths` from `@starter/api-contracts`. Co
 
 The web API URL is set at build time in `apps/web/src/environments`: development uses `http://localhost:8000`, production uses `https://api.starter.com`. Update it before deploying.
 
-Compose runs both applications, PostgreSQL, and Redis:
+Compose runs both applications, PostgreSQL, and Redis. Development Compose also runs MailHog for local email testing:
 
 ```sh
 docker compose --env-file apps/api/.env -f compose.dev.yml up --build --watch
@@ -64,6 +64,20 @@ docker compose --env-file apps/api/.env -f compose.prod.yml up --build
 Compose requires existing external volumes: `starter-api_postgres_data`, `starter-api_redis_data`, and `starter-api_uploads_data`. For a new installation, create them with `docker volume create <name>`. To reuse differently named volumes, set `POSTGRES_VOLUME_NAME`, `REDIS_VOLUME_NAME`, and `UPLOADS_VOLUME_NAME` in `apps/api/.env`.
 
 Containers use `DB_HOST=db` and `REDIS_URL=redis://redis:6379`; browsers need a publicly reachable API URL. Both Compose configurations expose web on port 4200 and API on port 8000.
+
+### Local email testing
+
+Development Compose routes API email to MailHog at `mailhog:1025` without SMTP authentication. Open http://localhost:8025 to inspect welcome and password reset emails. Messages are stored in memory and cleared when MailHog restarts.
+
+For an API running on the host, start MailHog separately:
+
+```sh
+docker compose --env-file apps/api/.env -f compose.dev.yml up -d mailhog
+```
+
+Set `MAIL_HOST=localhost`, `MAIL_PORT=1025`, `MAIL_USERNAME=`, `MAIL_PASSWORD=`, and `MAIL_FROM=Starter Support <support@starter.local>` in `apps/api/.env`, then restart the API. These are the defaults in `.env.example`. MailHog's SMTP and web ports are bound to localhost.
+
+For production, configure your SMTP provider's host, port, credentials, and sender in `apps/api/.env`. `MAIL_FROM` sets the sender; when omitted, it falls back to `MAIL_USERNAME`.
 
 ## License
 

@@ -73,13 +73,16 @@ import { ApiResponseInterceptor } from './shared/interceptors';
         transport: {
           host: config.get('MAIL_HOST'),
           port: +config.get('MAIL_PORT'),
-          auth: {
-            user: config.get('MAIL_USERNAME'),
-            pass: config.get('MAIL_PASSWORD')
-          }
+          auth:
+            config.get('MAIL_USERNAME') && config.get('MAIL_PASSWORD')
+              ? {
+                  user: config.get('MAIL_USERNAME'),
+                  pass: config.get('MAIL_PASSWORD')
+                }
+              : undefined
         },
         defaults: {
-          from: `Starter Support <${config.get('MAIL_USERNAME')}>`
+          from: config.get('MAIL_FROM') || `Starter Support <${config.get('MAIL_USERNAME') || 'support@starter.local'}>`
         }
       })
     }),
