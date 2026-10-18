@@ -7,17 +7,8 @@ services:
       target: api-development
     restart: unless-stopped
     env_file: .env
-    environment:
-      PORT: 8000
-      DB_HOST: db
-      DB_PORT: 5432
-      REDIS_URL: redis://redis:6379
-      MAIL_HOST: mailhog
-      MAIL_PORT: 1025
-      MAIL_USERNAME: ''
-      MAIL_PASSWORD: ''
     ports:
-      - '8000:8000'
+      - '${API_PORT:-8000}:8000'
     volumes:
       - uploads_data:/app/apps/api/uploads
     depends_on:
@@ -32,10 +23,8 @@ services:
         - action: sync
           path: ./apps/api/src
           target: /app/apps/api/src
-        - action: rebuild
-          path: ./package.json
-        - action: rebuild
-          path: ./pnpm-lock.yaml
+          ignore:
+            - node_modules/
 
   web:
     build:
@@ -45,23 +34,14 @@ services:
     environment:
       PORT: 4200
     ports:
-      - '4200:4200'
+      - '${WEB_PORT:-4200}:4200'
     develop:
       watch:
         - action: sync
           path: ./apps/web/src
           target: /app/apps/web/src
-        - action: sync
-          path: ./apps/web/public
-          target: /app/apps/web/public
-        - action: sync
-          path: ./libs/api-contracts/src
-          target: /app/libs/api-contracts/src
-        - action: rebuild
-          path: ./package.json
-        - action: rebuild
-          path: ./pnpm-lock.yaml
-
+          ignore:
+            - node_modules/
   mailhog:
     image: mailhog/mailhog:v1.0.1
     platform: linux/amd64
