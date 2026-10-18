@@ -1,9 +1,7 @@
 {
   "name": "nx-stack",
   "version": "0.0.0",
-  "private": true,
   "description": "Angular web and NestJS API Nx workspace",
-  "license": "SEE LICENSE IN README.md",
   "author": {
     "name": "Wilfried Musanzi",
     "url": "https://musanzi.me"
