@@ -1,0 +1,10 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@starter/api-contracts": ["./libs/api-contracts/src/index.ts"]
+    }
+  }
+}

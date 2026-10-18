@@ -1,0 +1,99 @@
+name: starter
+
+services:
+  api:
+    build:
+      context: .
+      target: api-development
+    restart: unless-stopped
+    env_file: ./apps/api/.env
+    environment:
+      PORT: 8000
+      DB_HOST: db
+      DB_PORT: 5432
+      REDIS_URL: redis://redis:6379
+    ports:
+      - '8000:8000'
+    volumes:
+      - uploads_data:/app/apps/api/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/api/src
+          target: /app/apps/api/src
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./pnpm-lock.yaml
+
+  web:
+    build:
+      context: .
+      target: web-development
+    restart: unless-stopped
+    environment:
+      PORT: 4200
+    ports:
+      - '4200:4200'
+    develop:
+      watch:
+        - action: sync
+          path: ./apps/web/src
+          target: /app/apps/web/src
+        - action: sync
+          path: ./apps/web/public
+          target: /app/apps/web/public
+        - action: sync
+          path: ./libs/api-contracts/src
+          target: /app/libs/api-contracts/src
+        - action: rebuild
+          path: ./package.json
+        - action: rebuild
+          path: ./pnpm-lock.yaml
+
+  db:
+    image: postgres:18-alpine
+    ports:
+      - '127.0.0.1:5432:5432'
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USERNAME:?DB_USERNAME is required}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      POSTGRES_DB: ${DB_NAME:?DB_NAME is required}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:8-alpine
+    ports:
+      - '127.0.0.1:6379:6379'
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
+    external: true
+    name: ${POSTGRES_VOLUME_NAME:-starter-api_postgres_data}
+  redis_data:
+    external: true
+    name: ${REDIS_VOLUME_NAME:-starter-api_redis_data}
+  uploads_data:
+    external: true
+    name: ${UPLOADS_VOLUME_NAME:-starter-api_uploads_data}

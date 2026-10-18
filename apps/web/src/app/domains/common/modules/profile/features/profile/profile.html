@@ -1,0 +1,219 @@
+<section class="px-4 py-8 sm:px-6 lg:px-10 lg:py-12">
+  <div class="w-full max-w-6xl">
+    <div class="mb-7">
+      <p class="text-sm font-medium text-primary-600">Paramètres du compte</p>
+      <h1 class="mt-1 text-3xl font-semibold tracking-tight">Mon profil</h1>
+      <p class="mt-2 max-w-2xl text-sm text-neutral-500">
+        Gérez vos informations personnelles et les paramètres de sécurité de votre compte.
+      </p>
+    </div>
+
+    <div
+      class="mb-6 flex flex-col gap-5 rounded-md border border-neutral-200 bg-neutral-50 p-5 sm:flex-row sm:items-center">
+      <div class="relative shrink-0">
+        <img
+          class="size-20 rounded-md border-4 border-white object-cover shadow-sm"
+          [src]="profileImageUrl()"
+          alt="Photo de profil" />
+        @if (store.isUpdatingProfileImage()) {
+          <span
+            class="absolute inset-1 flex items-center justify-center rounded-md bg-black/60 text-xs font-medium text-white"
+            aria-live="polite">
+            Envoi…
+          </span>
+        }
+      </div>
+      <div class="min-w-0 flex-1">
+        <div class="flex flex-wrap items-center gap-2">
+          <h2 class="truncate text-xl font-semibold">{{ authStore.user()?.name }}</h2>
+          <span class="rounded-full bg-primary-100 px-2.5 py-1 text-xs font-medium text-primary-700">
+            Administrateur
+          </span>
+        </div>
+        <input
+          #profileImageInput
+          class="sr-only"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          (change)="onProfileImageSelected($event)" />
+        <button
+          matButton="outlined"
+          class="mt-3"
+          type="button"
+          [disabled]="store.isUpdatingProfileImage()"
+          (click)="profileImageInput.click()">
+          <mat-icon svgIcon="image-plus" />
+          {{ store.isUpdatingProfileImage() ? 'Envoi en cours…' : 'Changer la photo' }}
+        </button>
+      </div>
+    </div>
+
+    @if (store.profileImageError()) {
+      <message
+        class="mb-6"
+        type="error"
+        title="Échec de la mise à jour"
+        [message]="store.profileImageError()"
+        (dismissed)="store.clearProfileImageMessage()" />
+    } @else if (store.profileImageUpdated()) {
+      <message
+        class="mb-6"
+        type="success"
+        title="Photo mise à jour"
+        message="Votre nouvelle photo de profil a bien été enregistrée."
+        (dismissed)="store.clearProfileImageMessage()" />
+    }
+
+    <div class="grid items-start gap-6 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]">
+      <mat-card appearance="outlined" class="overflow-hidden rounded-md border-neutral-200 shadow-sm">
+        <div class="flex items-start gap-3 border-b border-neutral-200 p-6">
+          <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-primary-100 text-primary-700">
+            <mat-icon svgIcon="user-round-pen" />
+          </span>
+          <div>
+            <h2 class="text-lg font-semibold">Informations personnelles</h2>
+            <p class="mt-1 text-sm text-neutral-500">Mettez à jour les informations associées à votre compte.</p>
+          </div>
+        </div>
+
+        <mat-card-content class="p-6">
+          @if (store.profileError()) {
+            <message
+              class="mb-5"
+              type="error"
+              title="Échec de la mise à jour"
+              [message]="store.profileError()"
+              (dismissed)="store.clearProfileMessage()" />
+          } @else if (store.profileUpdated()) {
+            <message
+              class="mb-5"
+              type="success"
+              title="Profil mis à jour"
+              message="Vos informations ont bien été enregistrées."
+              (dismissed)="store.clearProfileMessage()" />
+          }
+
+          <form class="flex flex-col gap-5" (submit)="onUpdateProfile(); $event.preventDefault()">
+            <div class="grid gap-x-4 gap-y-5 sm:grid-cols-2">
+              <mat-form-field appearance="outline">
+                <mat-label>Nom</mat-label>
+                <input matInput [formField]="profileForm.name" autocomplete="name" />
+                @if (profileForm.name().touched() && profileForm.name().errors().length) {
+                  <mat-error>{{ profileForm.name().errors()[0].message }}</mat-error>
+                }
+              </mat-form-field>
+
+              <mat-form-field appearance="outline">
+                <mat-label>Adresse e-mail</mat-label>
+                <input matInput type="email" [formField]="profileForm.email" autocomplete="email" />
+                @if (profileForm.email().touched() && profileForm.email().errors().length) {
+                  <mat-error>{{ profileForm.email().errors()[0].message }}</mat-error>
+                }
+              </mat-form-field>
+            </div>
+            <div class="flex justify-end border-t border-neutral-200 pt-5">
+              <button
+                class="w-full sm:w-auto"
+                matButton="filled"
+                type="submit"
+                [disabled]="store.isUpdatingProfile() || profileForm().invalid()">
+                <mat-icon svgIcon="save" />
+                {{ store.isUpdatingProfile() ? 'Enregistrement…' : 'Enregistrer les modifications' }}
+              </button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card
+        appearance="outlined"
+        class="overflow-hidden rounded-md border-neutral-200 shadow-sm lg:sticky lg:top-6">
+        <div class="flex items-start gap-3 border-b border-neutral-200 p-6">
+          <span class="flex size-10 shrink-0 items-center justify-center rounded-xl bg-neutral-100 text-neutral-700">
+            <mat-icon svgIcon="shield-check" />
+          </span>
+          <div>
+            <h2 class="text-lg font-semibold">Sécurité</h2>
+            <p class="mt-1 text-sm text-neutral-500">Choisissez un nouveau mot de passe sécurisé.</p>
+          </div>
+        </div>
+
+        <mat-card-content class="p-6">
+          @if (store.passwordError()) {
+            <message
+              class="mb-5"
+              type="error"
+              title="Échec de la mise à jour"
+              [message]="store.passwordError()"
+              (dismissed)="store.clearPasswordMessage()" />
+          } @else if (store.passwordUpdated()) {
+            <message
+              class="mb-5"
+              type="success"
+              title="Mot de passe mis à jour"
+              message="Votre nouveau mot de passe est maintenant actif."
+              (dismissed)="store.clearPasswordMessage()" />
+          }
+
+          <form class="flex flex-col gap-5" (submit)="onUpdatePassword(); $event.preventDefault()">
+            <mat-form-field appearance="outline">
+              <mat-label>Nouveau mot de passe</mat-label>
+              <input
+                matInput
+                [type]="hidePassword ? 'password' : 'text'"
+                [formField]="passwordForm.password"
+                autocomplete="new-password" />
+              <button
+                matIconButton
+                matSuffix
+                type="button"
+                [attr.aria-label]="hidePassword ? 'Afficher le mot de passe' : 'Masquer le mot de passe'"
+                (click)="hidePassword = !hidePassword">
+                <mat-icon [svgIcon]="hidePassword ? 'eye' : 'eye-off'" />
+              </button>
+              @if (passwordForm.password().touched() && passwordForm.password().errors().length) {
+                <mat-error>{{ passwordForm.password().errors()[0].message }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Confirmer le mot de passe</mat-label>
+              <input
+                matInput
+                [type]="hidePasswordConfirmation ? 'password' : 'text'"
+                [formField]="passwordForm.confirmPassword"
+                autocomplete="new-password" />
+              <button
+                matIconButton
+                matSuffix
+                type="button"
+                [attr.aria-label]="hidePasswordConfirmation ? 'Afficher la confirmation' : 'Masquer la confirmation'"
+                (click)="hidePasswordConfirmation = !hidePasswordConfirmation">
+                <mat-icon [svgIcon]="hidePasswordConfirmation ? 'eye' : 'eye-off'" />
+              </button>
+              @if (passwordForm.confirmPassword().touched() && passwordForm.confirmPassword().errors().length) {
+                <mat-error>{{ passwordForm.confirmPassword().errors()[0].message }}</mat-error>
+              }
+            </mat-form-field>
+
+            <div class="flex gap-3 rounded-md bg-neutral-50 p-4 text-neutral-600">
+              <mat-icon class="mt-0.5 size-4 shrink-0" svgIcon="key-round" />
+              <p class="text-xs leading-5">
+                Utilisez une combinaison unique de lettres, chiffres et caractères spéciaux.
+              </p>
+            </div>
+
+            <button
+              class="w-full"
+              matButton="filled"
+              type="submit"
+              [disabled]="store.isUpdatingPassword() || passwordForm().invalid()">
+              <mat-icon svgIcon="lock-keyhole" />
+              {{ store.isUpdatingPassword() ? 'Mise à jour…' : 'Mettre à jour le mot de passe' }}
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</section>

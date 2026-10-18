@@ -1,0 +1,76 @@
+{
+  "name": "api",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/api/src",
+  "tags": ["scope:api", "type:app"],
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nest build",
+        "cwd": "apps/api"
+      },
+      "outputs": ["{workspaceRoot}/dist/apps/api"]
+    },
+    "serve": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "nest start --watch",
+        "cwd": "apps/api"
+      },
+      "continuous": true
+    },
+    "start": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node ../../dist/apps/api/src/main.js",
+        "cwd": "apps/api"
+      },
+      "continuous": true
+    },
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "eslint \"src/**/*.ts\"",
+        "cwd": "apps/api"
+      }
+    },
+    "db-migrate": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "typeorm migration:generate ./src/modules/database/migrations/$name -d ../../dist/apps/api/src/modules/database/orm.config.js",
+        "cwd": "apps/api"
+      },
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "db-up": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "typeorm migration:run -d ../../dist/apps/api/src/modules/database/orm.config.js",
+        "cwd": "apps/api"
+      },
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "db-down": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "typeorm migration:revert -d ../../dist/apps/api/src/modules/database/orm.config.js",
+        "cwd": "apps/api"
+      },
+      "dependsOn": ["build"],
+      "cache": false
+    },
+    "db-seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node ../../dist/apps/api/src/modules/database/seeds/index.js",
+        "cwd": "apps/api"
+      },
+      "dependsOn": ["build"],
+      "cache": false
+    }
+  }
+}
