@@ -1,4 +1,5 @@
 import type { components } from '@starter/api-contracts';
+
 export type IProfileFormModel = Pick<components['schemas']['CreateUserDto'], 'name' | 'email'>;
 
 export type IUpdatePasswordFormModel = components['schemas']['UpdatePasswordDto'] & {

@@ -1,33 +1,11 @@
 import chroma from 'chroma-js';
 import { Hsluv } from 'hsluv';
-
-interface PaletteConfig {
-  color: string;
-  hue?: number;
-  hues?: number[];
-  colorMode?: 'linear' | 'perceived';
-  h?: number;
-  s?: number;
-  lMin?: number;
-  lMax?: number;
-  mode?: 'hex' | 'p-3' | 'oklch' | 'hsl';
-}
-
-interface Color {
-  hue: number;
-  hex: string;
-  oklch: string;
-  h: number;
-  hScale: number;
-  s: number;
-  sScale: number;
-  l: number;
-}
+import type { IPaletteColor, IPaletteConfig } from './interfaces';
 
 export class TonalPalette {
-  private palette: Color[];
+  private palette: IPaletteColor[];
 
-  constructor(config: PaletteConfig) {
+  constructor(config: IPaletteConfig) {
     this.palette = this.generatePalette(config);
   }
 
@@ -36,7 +14,7 @@ export class TonalPalette {
    * Uses HSLuv for perceived mode and direct HSL manipulation for linear mode.
    * https://github.com/SimeonGriggs/tints.dev.
    */
-  private generatePalette(config: PaletteConfig): Color[] {
+  private generatePalette(config: IPaletteConfig): IPaletteColor[] {
     const { color } = config;
 
     // Tweaks may be passed in, otherwise use defaults
@@ -186,7 +164,7 @@ export class TonalPalette {
   /**
    * Get all colors in the palette.
    */
-  colors(): Color[] {
+  colors(): IPaletteColor[] {
     return this.palette;
   }
 

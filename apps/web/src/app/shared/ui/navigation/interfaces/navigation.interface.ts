@@ -1,5 +1,7 @@
 import { IsActiveMatchOptions } from '@angular/router';
 
+export type INavigationActiveOptions = { exact: boolean } | IsActiveMatchOptions;
+
 export interface INavigationItem {
   id: string;
   label: string;
@@ -10,5 +12,5 @@ export interface INavigationItem {
   children?: INavigationItem[];
   disabled?: boolean;
   expanded?: boolean;
-  activeOptions?: { exact: boolean } | IsActiveMatchOptions;
+  activeOptions?: INavigationActiveOptions;
 }

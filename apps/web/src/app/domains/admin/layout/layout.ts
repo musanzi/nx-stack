@@ -3,9 +3,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
+
 import { Media } from '@/app/core/media';
-import { PageLoader } from '@/app/shared/ui/page-loader/page-loader';
-import { Sidebar } from '@/app/shared/ui/sidebar/sidebar';
+import { AuthStore } from '@/app/domains/auth/data-access';
+import { PageLoader, Sidebar } from '@/app/shared/ui';
+
 import { NAVIGATION } from './data/navigation';
 
 @Component({
@@ -30,7 +32,11 @@ import { NAVIGATION } from './data/navigation';
           [disableClose]="!isMobile()"
           fixedInViewport
           #sidenav="matSidenav">
-          <sidebar [navigation]="navigation" profileRoute="/admin/profile" />
+          <sidebar
+            [navigation]="navigation"
+            [user]="authStore.user()"
+            profileRoute="/admin/profile"
+            (signedOut)="authStore.signOut()" />
         </mat-sidenav>
 
         <mat-sidenav-content class="flex flex-col lg:h-dvh lg:overflow-hidden">
@@ -61,8 +67,9 @@ import { NAVIGATION } from './data/navigation';
   `
 })
 export class AdminLayout {
-  private media = inject(Media);
+  protected readonly authStore = inject(AuthStore);
+  private readonly media = inject(Media);
 
   protected readonly navigation = NAVIGATION;
-  protected isMobile = computed(() => this.media.match(`(max-width: 1023px)`)());
+  protected readonly isMobile = computed(() => this.media.match('(max-width: 1023px)')());
 }

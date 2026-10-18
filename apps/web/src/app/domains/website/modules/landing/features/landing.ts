@@ -1,5 +1,5 @@
-import { AuthStore } from '@/app/domains/auth/data-access/auth.store';
 import { Component, inject } from '@angular/core';
+import { AuthStore } from '@/app/domains/auth/data-access';
 import { LandingCta } from '../ui/cta/cta';
 import { LandingFeatures } from '../ui/features/features';
 import { LandingHero } from '../ui/hero/hero';

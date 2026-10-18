@@ -1,11 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { isPlatformBrowser } from '@angular/common';
-import { DestroyRef, inject, PLATFORM_ID, Service, signal, Signal, WritableSignal } from '@angular/core';
-
-interface MediaQueryObserver {
-  matches: WritableSignal<boolean>;
-  handler: (event: MediaQueryListEvent) => void;
-}
+import { DestroyRef, inject, PLATFORM_ID, Service, signal, Signal } from '@angular/core';
+import type { IMediaQueryObserver } from './interfaces';
 
 @Service()
 export class Media {
@@ -15,7 +11,7 @@ export class Media {
   private mediaMatcher = inject(MediaMatcher);
 
   // State
-  private matchers = new Map<string, MediaQueryObserver>();
+  private matchers = new Map<string, IMediaQueryObserver>();
 
   /**
    * Creates a new media query observer signal for the given query.

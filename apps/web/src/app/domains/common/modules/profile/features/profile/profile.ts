@@ -1,4 +1,3 @@
-import type { components } from '@starter/api-contracts';
 import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { email, form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,11 +5,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthStore } from '@/app/domains/auth/data-access/auth.store';
+import type { components } from '@starter/api-contracts';
+
+import { AuthStore } from '@/app/domains/auth/data-access';
+import { Message } from '@/app/shared/ui';
 import { environment } from '@/environments/environment';
+
 import { ProfileStore } from '../../data-access/profile.store';
 import { IProfileFormModel, IUpdatePasswordFormModel } from '../../interfaces';
-import { Message } from '@/app/shared/ui';
 
 @Component({
   imports: [Message, FormField, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule],

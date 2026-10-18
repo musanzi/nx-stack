@@ -1,11 +1,13 @@
-import type { components, operations } from '@starter/api-contracts';
 import { DOCUMENT } from '@angular/common';
-import { getApiErrorMessage } from '@/app/core/api';
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import type { components, operations } from '@starter/api-contracts';
 import { catchError, concatMap, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
+
+import { getApiErrorMessage } from '@/app/core/api';
+
 import { IUsersQueryParams, IRemoveUserCommand, IUpdateUserCommand, IUsersState } from '../interfaces';
 
 const initialState: IUsersState = {

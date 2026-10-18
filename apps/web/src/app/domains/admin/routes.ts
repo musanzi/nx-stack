@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { AdminLayout } from './layout/layout';
 
 const routes: Routes = [

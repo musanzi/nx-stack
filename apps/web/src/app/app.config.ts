@@ -1,15 +1,15 @@
-import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { isPlatformBrowser } from '@angular/common';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApplicationConfig, inject, PLATFORM_ID, provideAppInitializer } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { provideClientHydration } from '@angular/platform-browser';
 import { provideRouter, TitleStrategy, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
-import { provideIcons } from '@/app/core/icons/provider';
+import { provideIcons } from '@/app/core/icons';
 import { provideTheming } from '@/app/core/theming';
 import { routes } from './app.routes';
 import { httpInterceptor } from './core/interceptors';
 import { PageTitleStrategy } from './core/strategies';
-import { provideClientHydration } from '@angular/platform-browser';
 import { AuthStore } from './domains/auth/data-access';
 
 export const appConfig: ApplicationConfig = {

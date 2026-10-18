@@ -44,7 +44,7 @@ export class FormRenderer {
     }));
   });
 
-  responses(): Record<string, string | string[]> {
+  responses(): IFormResponses {
     return Object.fromEntries(
       this.answersModel().answers.map((answer) => [
         answer.name,
@@ -56,7 +56,9 @@ export class FormRenderer {
   }
 
   submit(handler: (responses: IFormResponses) => void | Promise<void>): void {
-    if (this.isEmpty()) return;
+    if (this.isEmpty()) {
+      return;
+    }
 
     submit(this.answerForm, async () => handler(this.responses()));
   }
@@ -83,7 +85,9 @@ export class FormRenderer {
   }
 
   private responseValue(answer: IFormAnswer): string {
-    if (answer.type !== 'select' && answer.type !== 'radio') return answer.value;
+    if (answer.type !== 'select' && answer.type !== 'radio') {
+      return answer.value;
+    }
     const selected = answer.options.find((option) => option.value === answer.value);
     return selected?.label ?? answer.value;
   }

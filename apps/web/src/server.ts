@@ -5,8 +5,7 @@ import {
   isMainModule,
   writeResponseToNodeResponse
 } from '@angular/ssr/node';
-import express from 'express';
-import { Express } from 'express';
+import express, { type Express } from 'express';
 
 const browserDistFolder = join(import.meta.dirname, '../browser');
 

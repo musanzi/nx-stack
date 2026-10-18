@@ -1,5 +1,6 @@
-import { Component, input } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { IUserSummary } from '@/app/shared/interfaces';
 import { INavigationItem } from '../navigation/interfaces';
 import { Navigation } from '../navigation/navigation';
 import { User } from '../user/user';
@@ -12,4 +13,6 @@ import { User } from '../user/user';
 export class Sidebar {
   readonly navigation = input.required<INavigationItem[]>();
   readonly profileRoute = input.required<string>();
+  readonly user = input.required<IUserSummary | null>();
+  readonly signedOut = output<void>();
 }

@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { inject, Service } from '@angular/core';
-import { TonalPalette } from '@/app/core/theming/palette';
-import { Colors } from './models/theming';
+import type { IColors, IThemePalette } from './interfaces';
+import { TonalPalette } from './palette';
 import { THEME_CONFIG } from './provider';
 
 @Service()
@@ -26,10 +26,7 @@ export class Theming {
    * applies it to the DOM by injecting CSS variables into a
    * style element.
    */
-  private generateTheme(config: Colors): {
-    primary: TonalPalette;
-    error: TonalPalette;
-  } {
+  private generateTheme(config: IColors): IThemePalette {
     const primary = new TonalPalette({
       color: config.primary
     });

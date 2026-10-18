@@ -1,4 +1,3 @@
-import type { components } from '@starter/api-contracts';
 import { DatePipe } from '@angular/common';
 import { Component, computed, debounced, DestroyRef, effect, inject, OnInit, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -8,8 +7,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-
+import type { components } from '@starter/api-contracts';
 import { filter } from 'rxjs';
+
 import { UsersStore } from '../../data-access/users.store';
 import { IUsersQueryParams, IRemoveUserDialogData, IUserDialogData, IUserDialogResult } from '../../interfaces';
 import { RemoveUserDialog } from '../../ui/remove-user-dialog/remove-user-dialog';

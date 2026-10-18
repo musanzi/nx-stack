@@ -5,7 +5,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+
 import { Message } from '@/app/shared/ui';
+
 import { ResetPasswordStore } from '../../data-access/reset-password.store';
 
 @Component({

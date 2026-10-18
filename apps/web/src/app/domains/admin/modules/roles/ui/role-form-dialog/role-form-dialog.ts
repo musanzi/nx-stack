@@ -1,10 +1,10 @@
-import type { components } from '@starter/api-contracts';
 import { Component, inject, signal } from '@angular/core';
 import { FormField, form, required, submit, validate } from '@angular/forms/signals';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import type { components } from '@starter/api-contracts';
 
 import { IRoleDialogData, IRoleDialogResult } from '../../interfaces';
 

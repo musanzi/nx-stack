@@ -3,8 +3,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
+
 import { Media } from '@/app/core/media';
+import { AuthStore } from '@/app/domains/auth/data-access';
 import { PageLoader, Sidebar } from '@/app/shared/ui';
+
 import { NAVIGATION } from './data/navigation';
 
 @Component({
@@ -29,7 +32,11 @@ import { NAVIGATION } from './data/navigation';
           [disableClose]="!isMobile()"
           fixedInViewport
           #sidenav="matSidenav">
-          <sidebar [navigation]="navigation" profileRoute="/user/profile" />
+          <sidebar
+            [navigation]="navigation"
+            [user]="authStore.user()"
+            profileRoute="/user/profile"
+            (signedOut)="authStore.signOut()" />
         </mat-sidenav>
 
         <mat-sidenav-content class="flex flex-col lg:h-dvh lg:overflow-hidden">
@@ -55,6 +62,7 @@ import { NAVIGATION } from './data/navigation';
   `
 })
 export class UserLayout {
+  protected readonly authStore = inject(AuthStore);
   private readonly media = inject(Media);
 
   protected readonly navigation = NAVIGATION;

@@ -1,4 +1,4 @@
-import { ISdg } from '../interfaces/sdg.interface';
+import { ISdg } from '../interfaces';
 
 export const sdgs: ISdg[] = [
   {

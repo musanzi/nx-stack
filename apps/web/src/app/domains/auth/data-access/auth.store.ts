@@ -1,10 +1,10 @@
-import type { components } from '@starter/api-contracts';
-import { signalStore, withState, withMethods, patchState, withProps, withComputed } from '@ngrx/signals';
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, tap, catchError, of, exhaustMap, map } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
+import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import type { components } from '@starter/api-contracts';
+import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 
 import { IAuthState } from '../interfaces';
 

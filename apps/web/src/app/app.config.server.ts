@@ -1,4 +1,4 @@
-import { mergeApplicationConfig, ApplicationConfig } from '@angular/core';
+import { ApplicationConfig, mergeApplicationConfig } from '@angular/core';
 import { provideServerRendering, withRoutes } from '@angular/ssr';
 import { appConfig } from '@/app/app.config';
 import { serverRoutes } from '@/app/app.routes.server';

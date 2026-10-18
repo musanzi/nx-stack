@@ -2,7 +2,7 @@ import { Component, computed, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NAVIGATION_LINKS } from '../../data/navigation';
+import { NAVIGATION_LINKS } from '../../data';
 
 @Component({
   selector: 'website-header',

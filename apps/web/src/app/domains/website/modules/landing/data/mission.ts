@@ -1,4 +1,4 @@
-import { IMission } from '../interfaces/mission.interface';
+import { IMission } from '../interfaces';
 
 export const MISSIONS: IMission[] = [
   {

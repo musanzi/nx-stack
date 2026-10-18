@@ -25,8 +25,6 @@ export interface IQuestionTypeOption {
   label: string;
 }
 
-export const OPTION_TYPES = new Set<IQuestionType>(['select', 'radio', 'checkbox']);
-
 export interface IFormAnswerOption {
   label: string;
   value: string;

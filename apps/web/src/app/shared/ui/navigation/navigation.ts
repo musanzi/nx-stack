@@ -6,7 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIcon } from '@angular/material/icon';
 import { isActive, IsActiveMatchOptions, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter, take } from 'rxjs';
-import { INavigationItem } from './interfaces';
+import { INavigationActiveOptions, INavigationItem } from './interfaces';
 
 @Component({
   selector: 'navigation',
@@ -55,7 +55,7 @@ export class Navigation {
     return items;
   }
 
-  isActiveOption(options: { exact: boolean } | IsActiveMatchOptions): IsActiveMatchOptions {
+  isActiveOption(options: INavigationActiveOptions): IsActiveMatchOptions {
     if ('exact' in options) {
       return options.exact
         ? {

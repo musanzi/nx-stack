@@ -1,3 +1,3 @@
-export interface QueryParams {
+export interface IQueryParams {
   page: number | null;
 }

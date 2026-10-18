@@ -1,4 +1,4 @@
-import { IAbout } from '../interfaces/about.interface';
+import { IAbout } from '../interfaces';
 
 export const ABOUT: IAbout[] = [
   {

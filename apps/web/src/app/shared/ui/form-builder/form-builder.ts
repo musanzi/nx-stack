@@ -1,5 +1,5 @@
-import { Component, computed, model } from '@angular/core';
 import { CdkDrag, CdkDragDrop, CdkDragHandle, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { Component, computed, model } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -10,7 +10,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { IField, IForm, IOption, IQuestionType, IQuestionTypeOption, OPTION_TYPES } from '@/app/shared/interfaces';
+import { OPTION_TYPES } from '@/app/shared/data';
+import { IField, IForm, IOption, IQuestionType, IQuestionTypeOption } from '@/app/shared/interfaces';
 
 @Component({
   selector: 'form-builder',

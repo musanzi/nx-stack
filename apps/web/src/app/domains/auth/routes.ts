@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+
 import { AuthLayout } from './layout/layout';
 
 const routes: Routes = [
@@ -42,7 +43,8 @@ const routes: Routes = [
               'The flow stays clear, direct, and consistent with the rest of the authentication experience.'
           }
         },
-        loadComponent: () => import('./modules/forgot-password/features/forgot-password/forgot-password').then((c) => c.AuthForgotPassword)
+        loadComponent: () =>
+          import('./modules/forgot-password/features/forgot-password/forgot-password').then((c) => c.AuthForgotPassword)
       },
       {
         path: 'forgot-password-sent',
@@ -55,7 +57,9 @@ const routes: Routes = [
           }
         },
         loadComponent: () =>
-          import('./modules/forgot-password-sent/features/forgot-password-sent/forgot-password-sent').then((c) => c.AuthForgotPasswordSent)
+          import('./modules/forgot-password-sent/features/forgot-password-sent/forgot-password-sent').then(
+            (c) => c.AuthForgotPasswordSent
+          )
       },
       {
         path: 'reset-password',
@@ -67,7 +71,8 @@ const routes: Routes = [
             asideFootnote: 'Error states and primary actions stay visible without changing business logic.'
           }
         },
-        loadComponent: () => import('./modules/reset-password/features/reset-password/reset-password').then((c) => c.AuthResetPassword)
+        loadComponent: () =>
+          import('./modules/reset-password/features/reset-password/reset-password').then((c) => c.AuthResetPassword)
       }
     ]
   }

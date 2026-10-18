@@ -1,4 +1,5 @@
 import type { components, operations } from '@starter/api-contracts';
+
 export interface IUpdateRoleCommand {
   id: components['schemas']['RoleResponse']['id'];
   payload: components['schemas']['UpdateRoleDto'];

@@ -1,11 +1,13 @@
-import type { components } from '@starter/api-contracts';
 import { HttpClient } from '@angular/common/http';
-import { getApiErrorMessage } from '@/app/core/api';
 import { inject } from '@angular/core';
-import { AuthStore } from '@/app/domains/auth/data-access/auth.store';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
+import type { components } from '@starter/api-contracts';
 import { catchError, concatMap, EMPTY, finalize, pipe, tap } from 'rxjs';
+
+import { getApiErrorMessage } from '@/app/core/api';
+import { AuthStore } from '@/app/domains/auth/data-access';
+
 import { IProfileState } from '../interfaces';
 
 const initialState: IProfileState = {

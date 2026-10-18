@@ -1,4 +1,4 @@
-import { INavigationLink } from '../interfaces/navigation.interface';
+import { INavigationLink } from '../interfaces';
 
 export const NAVIGATION_LINKS: readonly INavigationLink[] = [
   { label: 'Home', path: '/', icon: 'house' },

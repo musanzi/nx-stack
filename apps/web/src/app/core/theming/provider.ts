@@ -5,12 +5,12 @@ import {
   makeEnvironmentProviders,
   provideAppInitializer
 } from '@angular/core';
-import { ThemeConfig } from './models/theming';
+import type { IThemeConfig } from './interfaces';
 import { Theming } from './theming';
 
-export const THEME_CONFIG = new InjectionToken<ThemeConfig>('THEME_CONFIG');
+export const THEME_CONFIG = new InjectionToken<IThemeConfig>('THEME_CONFIG');
 
-export const provideTheming = (config: ThemeConfig): EnvironmentProviders =>
+export const provideTheming = (config: IThemeConfig): EnvironmentProviders =>
   makeEnvironmentProviders([
     {
       provide: THEME_CONFIG,

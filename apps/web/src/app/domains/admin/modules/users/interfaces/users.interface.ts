@@ -1,4 +1,5 @@
 import type { components, operations } from '@starter/api-contracts';
+
 // Local list controls and store commands reference generated API models.
 export interface IUsersQueryParams {
   page: number;

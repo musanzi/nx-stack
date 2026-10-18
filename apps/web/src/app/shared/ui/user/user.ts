@@ -1,10 +1,10 @@
-import { AuthStore } from '@/app/domains/auth/data-access';
-import { environment } from '@/environments/environment';
-import { Component, computed, inject, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatDivider } from '@angular/material/list';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
+import { IUserSummary } from '@/app/shared/interfaces';
+import { environment } from '@/environments/environment';
 
 @Component({
   selector: 'user',
@@ -12,12 +12,11 @@ import { RouterLink } from '@angular/router';
   templateUrl: './user.html'
 })
 export class User {
-  profileRoute = input.required<string>();
-  authStore = inject(AuthStore);
+  readonly profileRoute = input.required<string>();
+  readonly user = input.required<IUserSummary | null>();
+  readonly signedOut = output<void>();
 
-  user = computed(() => this.authStore.user());
-
-  avatarImageUrl = computed(() => {
+  protected readonly avatarImageUrl = computed(() => {
     const user = this.user();
 
     return user?.avatar
@@ -26,8 +25,4 @@ export class User {
         : `${environment.apiUrl}/uploads/profiles/${user.avatar}`
       : '/images/avatar.webp';
   });
-
-  signOut(): void {
-    this.authStore.signOut();
-  }
 }
