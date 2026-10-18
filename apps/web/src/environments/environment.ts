@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://api.starter.com'
+  apiUrl: 'https://api.nx-stack.com'
 };

@@ -1,4 +1,4 @@
-name: starter
+name: nx-stack
 
 services:
   api:
@@ -104,10 +104,10 @@ services:
 volumes:
   postgres_data:
     external: true
-    name: ${POSTGRES_VOLUME_NAME:-starter-api_postgres_data}
+    name: ${POSTGRES_VOLUME_NAME:-nx-stack-api_postgres_data}
   redis_data:
     external: true
-    name: ${REDIS_VOLUME_NAME:-starter-api_redis_data}
+    name: ${REDIS_VOLUME_NAME:-nx-stack-api_redis_data}
   uploads_data:
     external: true
-    name: ${UPLOADS_VOLUME_NAME:-starter-api_uploads_data}
+    name: ${UPLOADS_VOLUME_NAME:-nx-stack-api_uploads_data}

@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import type { components } from '@starter/api-contracts';
+import type { components } from '@nx-stack/api-contracts';
 import { filter } from 'rxjs';
 
 import { RolesStore } from '../../data-access/roles.store';

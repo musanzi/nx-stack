@@ -7,7 +7,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import type { components } from '@starter/api-contracts';
+import type { components } from '@nx-stack/api-contracts';
 import { filter } from 'rxjs';
 
 import { UsersStore } from '../../data-access/users.store';

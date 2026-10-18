@@ -82,7 +82,7 @@ import { ApiResponseInterceptor } from './shared/interceptors';
               : undefined
         },
         defaults: {
-          from: config.get('MAIL_FROM') || `Starter Support <${config.get('MAIL_USERNAME') || 'support@starter.local'}>`
+          from: config.get('MAIL_FROM') || `nx-stack Support <${config.get('MAIL_USERNAME') || 'support@nx-stack.local'}>`
         }
       })
     }),

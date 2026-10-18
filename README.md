@@ -1,8 +1,6 @@
-# Starter
+# nx-stack
 
-A pnpm and Nx monorepo with a NestJS API and an Angular SSR frontend.\
-Includes authentication, profiles, and administration for users, roles, and statistics.\
-Generated OpenAPI types keep the frontend aligned with the API.
+nx-stack combines a NestJS API and an Angular SSR frontend in a pnpm and Nx monorepo, providing authentication, profile management, and administration for users, roles, and statistics, with generated OpenAPI types keeping the frontend and API in sync.
 
 ## Projects
 
@@ -10,7 +8,7 @@ Generated OpenAPI types keep the frontend aligned with the API.
 | -------------------- | ------------------------------------------------------------------------ |
 | `apps/api`           | NestJS backend with CQRS, TypeORM/PostgreSQL, Redis, and Swagger/Scalar. |
 | `apps/web`           | Angular frontend with Material, Tailwind CSS, and NgRx Signal Store.     |
-| `libs/api-contracts` | Generated OpenAPI types exported through `@starter/api-contracts`.       |
+| `libs/api-contracts` | Generated OpenAPI types exported through `@nx-stack/api-contracts`.      |
 
 See [AGENTS.md](AGENTS.md) for coding conventions and project boundaries.
 
@@ -19,8 +17,6 @@ See [AGENTS.md](AGENTS.md) for coding conventions and project boundaries.
 Requires Node.js 24, pnpm 12.11.2, PostgreSQL 18, and Redis 8. Run commands from the workspace root.
 
 ```sh
-corepack enable
-corepack prepare pnpm@12.11.2 --activate
 pnpm install --frozen-lockfile
 cp -n apps/api/.env.example apps/api/.env
 ```
@@ -48,11 +44,11 @@ Database commands build the API first; migrations and seeds never run automatica
 
 With the API running, use `pnpm generate:api` to regenerate types or `pnpm sync:api` to regenerate and build the web app. The default source is http://localhost:8000/openapi.json; override it with `OPENAPI_INPUT` for another URL or a local JSON/YAML file.
 
-Import `components`, `operations`, and `paths` from `@starter/api-contracts`. Commit generated changes; never edit them manually. Builds use committed contracts without requiring a running API.
+Import `components`, `operations`, and `paths` from `@nx-stack/api-contracts`. Commit generated changes; never edit them manually. Builds use committed contracts without requiring a running API.
 
 ## Configuration and Docker
 
-The web API URL is set at build time in `apps/web/src/environments`: development uses `http://localhost:8000`, production uses `https://api.starter.com`. Update it before deploying.
+The web API URL is set at build time in `apps/web/src/environments`: development uses `http://localhost:8000`, production uses `https://api.nx-stack.com`. Update it before deploying.
 
 Compose runs both applications, PostgreSQL, and Redis. Development Compose also runs MailHog for local email testing:
 
@@ -61,7 +57,7 @@ docker compose --env-file apps/api/.env -f compose.dev.yml up --build --watch
 docker compose --env-file apps/api/.env -f compose.prod.yml up --build
 ```
 
-Compose requires existing external volumes: `starter-api_postgres_data`, `starter-api_redis_data`, and `starter-api_uploads_data`. For a new installation, create them with `docker volume create <name>`. To reuse differently named volumes, set `POSTGRES_VOLUME_NAME`, `REDIS_VOLUME_NAME`, and `UPLOADS_VOLUME_NAME` in `apps/api/.env`.
+Compose requires existing external volumes: `nx-stack-api_postgres_data`, `nx-stack-api_redis_data`, and `nx-stack-api_uploads_data`. For a new installation, create them with `docker volume create <name>`. To reuse differently named volumes, set `POSTGRES_VOLUME_NAME`, `REDIS_VOLUME_NAME`, and `UPLOADS_VOLUME_NAME` in `apps/api/.env`.
 
 Containers use `DB_HOST=db` and `REDIS_URL=redis://redis:6379`; browsers need a publicly reachable API URL. Both Compose configurations expose web on port 4200 and API on port 8000.
 
@@ -75,10 +71,10 @@ For an API running on the host, start MailHog separately:
 docker compose --env-file apps/api/.env -f compose.dev.yml up -d mailhog
 ```
 
-Set `MAIL_HOST=localhost`, `MAIL_PORT=1025`, `MAIL_USERNAME=`, `MAIL_PASSWORD=`, and `MAIL_FROM=Starter Support <support@starter.local>` in `apps/api/.env`, then restart the API. These are the defaults in `.env.example`. MailHog's SMTP and web ports are bound to localhost.
+Set `MAIL_HOST=localhost`, `MAIL_PORT=1025`, `MAIL_USERNAME=`, `MAIL_PASSWORD=`, and `MAIL_FROM=nx-stack Support <support@nx-stack.local>` in `apps/api/.env`, then restart the API. These are the defaults in `.env.example`. MailHog's SMTP and web ports are bound to localhost.
 
 For production, configure your SMTP provider's host, port, credentials, and sender in `apps/api/.env`. `MAIL_FROM` sets the sender; when omitted, it falls back to `MAIL_USERNAME`.
 
 ## License
 
-The web template by Sercan Yemen retains its [ThemeForest license](https://themeforest.net/licenses/standard); the API by Wilfried M retains its MIT license.
+The API by [Wilfried Musanzi](https://musanzi.me) is licensed under the MIT license. The web template by Sercan Yemen retains its [ThemeForest license](https://themeforest.net/licenses/standard).

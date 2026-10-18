@@ -17,7 +17,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@core/*": ["./src/core/*"],
-      "@starter/api-contracts": ["../../libs/api-contracts/src/index.ts"]
+      "@nx-stack/api-contracts": ["../../libs/api-contracts/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

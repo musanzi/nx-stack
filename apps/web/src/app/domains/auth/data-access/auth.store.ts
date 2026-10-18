@@ -3,7 +3,7 @@ import { computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import type { components } from '@starter/api-contracts';
+import type { components } from '@nx-stack/api-contracts';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 
 import { IAuthState } from '../interfaces';

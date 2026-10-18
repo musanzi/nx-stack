@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import type { components } from '@starter/api-contracts';
+import type { components } from '@nx-stack/api-contracts';
 
 import { AuthStore } from '@/app/domains/auth/data-access';
 import { Message } from '@/app/shared/ui';
