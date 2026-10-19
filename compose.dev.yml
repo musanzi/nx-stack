@@ -12,6 +12,7 @@ services:
     ports:
       - '${API_PORT:-8000}:${API_PORT}'
     volumes:
+      - ./apps/api/src/modules/database/migrations:/app/apps/api/src/modules/database/migrations
       - uploads_data:/app/apps/api/uploads
     depends_on:
       db:
