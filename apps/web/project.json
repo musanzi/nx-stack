@@ -66,9 +66,6 @@
       },
       "defaultConfiguration": "development",
       "executor": "@angular/build:dev-server",
-      "options": {
-        "port": 4200
-      },
       "continuous": true
     },
     "lint": {

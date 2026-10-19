@@ -1,8 +1,6 @@
 # Workspace
 
-This pnpm and Nx monorepo contains a NestJS API and an Angular web application.\
-Application code lives in `apps/api` and `apps/web`.\
-Generated OpenAPI types live in `libs/api-contracts` and connect the API to the web application.
+This Nx monorepo contains a NestJS API and an Angular web application. Application code lives in `apps/api` and `apps/web`. Generated OpenAPI types live in `libs/api-contracts` and connect the API to the web application.
 
 ## Shared Rules
 
