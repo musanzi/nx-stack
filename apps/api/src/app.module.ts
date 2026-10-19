@@ -74,13 +74,10 @@ import { ApiResponseInterceptor } from './shared/interceptors';
         transport: {
           host: config.get('MAIL_HOST'),
           port: +config.get('MAIL_PORT'),
-          auth:
-            config.get('MAIL_USERNAME') && config.get('MAIL_PASSWORD')
-              ? {
-                  user: config.get('MAIL_USERNAME'),
-                  pass: config.get('MAIL_PASSWORD')
-                }
-              : undefined
+          auth: {
+            user: config.get('MAIL_USERNAME'),
+            pass: config.get('MAIL_PASSWORD')
+          }
         },
         defaults: {
           from:
