@@ -1,5 +1,4 @@
 name: nx-stack
-
 services:
   api:
     build:
@@ -28,7 +27,6 @@ services:
           target: /app/apps/api/src
           ignore:
             - node_modules/
-
   web:
     build:
       context: .
@@ -52,7 +50,9 @@ services:
     restart: unless-stopped
     networks:
       - nx-stack
-
+    ports:
+      - '1025:1025'
+      - '8025:8025'
   db:
     image: postgres:18-alpine
     restart: unless-stopped
@@ -69,7 +69,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
   redis:
     image: redis:8-alpine
     restart: unless-stopped
@@ -83,12 +82,10 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-
 networks:
   nx-stack:
     name: nx-stack
     driver: bridge
-
 volumes:
   postgres_data:
   redis_data:
