@@ -44,6 +44,10 @@ services:
           target: /app/apps/web/src
           ignore:
             - node_modules/
+        - action: sync
+          path: ./libs/api-contracts/src
+          target: /app/libs/api-contracts/src
+          initial_sync: true
   mailhog:
     image: mailhog/mailhog:v1.0.1
     platform: linux/amd64
