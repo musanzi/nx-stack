@@ -28,7 +28,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --prod --frozen-lockfile --ignore-scripts
 
 FROM node:24-alpine AS api-production
-ENV NODE_ENV=production PORT=8000
+ENV NODE_ENV=production
 WORKDIR /app/apps/api
 COPY --from=production-dependencies /app/node_modules /app/node_modules
 COPY --from=production-dependencies /app/package.json /app/package.json
@@ -38,7 +38,7 @@ USER node
 CMD ["node", "../../dist/apps/api/src/main.js"]
 
 FROM node:24-alpine AS web-production
-ENV NODE_ENV=production PORT=4200
+ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=production-dependencies /app/node_modules ./node_modules
 COPY --from=production-dependencies /app/package.json ./package.json
