@@ -25,6 +25,7 @@ services:
         - action: sync
           path: ./apps/api/src
           target: /app/apps/api/src
+          initial_sync: true
           ignore:
             - node_modules/
   web:
@@ -42,6 +43,7 @@ services:
         - action: sync
           path: ./apps/web/src
           target: /app/apps/web/src
+          initial_sync: true
           ignore:
             - node_modules/
         - action: sync
