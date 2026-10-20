@@ -3,9 +3,9 @@
 /* -------------------------------------------------------------------------- */
 @theme {
   /* Font family */
-  --font-sans: 'Roboto', system-ui;
+  --font-sans: 'DM Sans', sans-serif;
 
-  --font-display: 'Roboto', system-ui;
+  --font-display: 'DM Sans', sans-serif;
 
   --font-mono: ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
@@ -127,6 +127,10 @@
   --color-primary-800: var(--theme-color-primary-800);
   --color-primary-900: var(--theme-color-primary-900);
   --color-primary-950: var(--theme-color-primary-950);
+
+  /* Secondary color: use only for buttons and form controls. */
+  --color-secondary: var(--theme-color-secondary);
+  --color-on-secondary: var(--color-white);
 
   /* Error color palette */
   /* Theme color palette is generated dynamically. Do NOT edit! */

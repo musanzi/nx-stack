@@ -16,4 +16,21 @@
   input:not(.restore-autofill-styles) {
     --input-text-color: var(--color-neutral-950);
   }
+
+  input,
+  textarea,
+  select {
+    accent-color: var(--color-secondary);
+    caret-color: var(--color-secondary);
+
+    &:focus-visible:not(.cdk-program-focused) {
+      outline-color: var(--color-secondary);
+    }
+  }
+
+  input:not([matInput]):focus,
+  textarea:not([matInput]):focus,
+  select:focus {
+    border-color: var(--color-secondary);
+  }
 }
