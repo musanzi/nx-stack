@@ -533,6 +533,28 @@
     }
   }
 
+  /* ------------------------------------------------------------------------ */
+  /* Dialog                                                                   */
+  /* ------------------------------------------------------------------------ */
+  --mat-dialog-container-shape: 0.375rem;
+  --mat-dialog-container-color: var(--color-white);
+
+  .mat-mdc-dialog-container {
+    --color-surface: var(--color-white);
+    --mat-sys-surface: var(--color-white);
+  }
+
+  .mat-mdc-dialog-surface {
+    overflow: hidden;
+
+    > section,
+    > .mat-mdc-dialog-component-host,
+    > .mat-mdc-dialog-component-host > section {
+      min-height: 0;
+      max-height: inherit;
+    }
+  }
+
   /* mat-option */
   --mat-option-label-text-size: var(--text-base); /* 14px */
   --mat-option-label-text-line-height: var(--leading-5); /* 20px */

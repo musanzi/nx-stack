@@ -5,6 +5,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideRouter, TitleStrategy, withComponentInputBinding, withInMemoryScrolling } from '@angular/router';
+import { MAT_DIALOG_DEFAULT_OPTIONS, MatDialogConfig } from '@angular/material/dialog';
 import { provideIcons } from '@/app/core/icons';
 import { provideTheming } from '@/app/core/theming';
 import { routes } from './app.routes';
@@ -14,6 +15,14 @@ import { AuthStore } from '@web/domains/auth/shared/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [
+    {
+      provide: MAT_DIALOG_DEFAULT_OPTIONS,
+      useValue: {
+        ...new MatDialogConfig(),
+        maxWidth: 'calc(100vw - 2rem)',
+        maxHeight: 'calc(100dvh - 2rem)'
+      }
+    },
     provideHttpClient(withInterceptors([httpInterceptor])),
     provideClientHydration(),
     provideRouter(
