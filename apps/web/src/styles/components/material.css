@@ -1160,8 +1160,70 @@
   /* ------------------------------------------------------------------------ */
   /* Tabs                                                                     */
   /* ------------------------------------------------------------------------ */
-  --mat-tab-container-height: 2.25rem;
+  --mat-tab-container-height: 2.5rem;
   --mat-tab-divider-color: var(--color-neutral-200);
+  --mat-tab-label-text-font: var(--font-sans);
+  --mat-tab-label-text-size: var(--text-base);
+  --mat-tab-label-text-line-height: var(--leading-5);
+  --mat-tab-label-text-tracking: var(--tracking-normal);
+  --mat-tab-label-text-weight: var(--font-weight-medium);
+  --mat-tab-active-indicator-height: 2px;
+  --mat-tab-active-indicator-shape: 0.375rem;
+  --mat-tab-active-indicator-color: var(--color-primary);
+  --mat-tab-active-label-text-color: var(--color-primary);
+  --mat-tab-active-hover-label-text-color: var(--color-primary);
+  --mat-tab-active-focus-label-text-color: var(--color-primary);
+  --mat-tab-active-hover-indicator-color: var(--color-primary);
+  --mat-tab-active-focus-indicator-color: var(--color-primary);
+  --mat-tab-inactive-label-text-color: var(--color-on-surface-variant);
+  --mat-tab-inactive-hover-label-text-color: var(--color-primary);
+  --mat-tab-inactive-focus-label-text-color: var(--color-primary);
+  --mat-tab-active-ripple-color: transparent;
+  --mat-tab-inactive-ripple-color: transparent;
+
+  .mat-mdc-tab-labels,
+  .mat-mdc-tab-links {
+    gap: 1.5rem;
+  }
+
+  .mat-mdc-tab,
+  .mat-mdc-tab-link {
+    min-width: 0;
+    padding: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset-inline: 0;
+      bottom: 0;
+      height: 2px;
+      border-radius: 0.375rem;
+      background-color: var(--color-primary-300);
+      pointer-events: none;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 150ms ease;
+    }
+
+    &:not(.mdc-tab--active):not([aria-disabled='true']):is(:hover, :focus-visible)::after {
+      transform: scaleX(1);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: -2px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &::after {
+        transition: none;
+      }
+    }
+
+    .mdc-tab__text-label {
+      gap: 0.5rem;
+    }
+  }
 
   /* ------------------------------------------------------------------------ */
   /* Timepicker                                                               */

@@ -9,6 +9,6 @@
   <navigation class="mt-8 mb-4 min-h-0 flex-1 overflow-y-auto" [items]="navigation()" />
 
   <div class="shrink-0 p-2">
-    <user [profileRoute]="profileRoute()" [user]="user()" (signedOut)="signedOut.emit()" />
+    <user [user]="user()" (editProfile)="editProfile.emit()" (signedOut)="signedOut.emit()" />
   </div>
 </div>

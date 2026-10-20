@@ -2,17 +2,17 @@ import { Component, computed, input, output } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatDivider } from '@angular/material/list';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
-import { RouterLink } from '@angular/router';
 import { IUserSummary } from '@web/shared/interfaces';
 import { environment } from '@web/environments/environment';
 
 @Component({
   selector: 'user',
-  imports: [MatDivider, MatIcon, MatMenu, MatMenuItem, MatMenuTrigger, RouterLink],
+  imports: [MatDivider, MatIcon, MatMenu, MatMenuItem, MatMenuTrigger],
   templateUrl: './user.html'
 })
 export class User {
-  readonly profileRoute = input.required<string>();
+  readonly compact = input(false);
+  readonly editProfile = output<void>();
   readonly user = input.required<IUserSummary | null>();
   readonly signedOut = output<void>();
 
@@ -20,7 +20,7 @@ export class User {
     const user = this.user();
 
     return user?.avatar
-      ? user.avatar.includes('https://')
+      ? /^https?:\/\//i.test(user.avatar)
         ? user.avatar
         : `${environment.apiUrl}/uploads/profiles/${user.avatar}`
       : '/images/avatar.webp';

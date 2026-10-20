@@ -17,6 +17,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@core/*": ["./src/core/*"],
+      "@web/core/*": ["./src/app/core/*"],
       "@web/domains/*": ["./src/app/domains/*"],
       "@web/shared/*": ["./src/app/shared/*"],
       "@web/environments/*": ["./src/environments/*"],

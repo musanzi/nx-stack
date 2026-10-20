@@ -1,84 +1,94 @@
 import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
-import { email, form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
+import { disabled, email, form, FormField, minLength, required, submit, validate } from '@angular/forms/signals';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTabsModule } from '@angular/material/tabs';
 import type { components } from '@web/api-contracts';
-
 import { AuthStore } from '@web/domains/auth/shared/data-access';
-import { Message } from '@web/shared/ui';
 import { environment } from '@web/environments/environment';
-
 import { ProfileStore } from '@web/domains/common/modules/profile/shared/data-access';
 import { IProfileFormModel, IUpdatePasswordFormModel } from '@web/domains/common/modules/profile/shared/interfaces';
 
 @Component({
-  imports: [Message, FormField, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule],
+  imports: [FormField, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTabsModule],
   templateUrl: './profile.html',
   providers: [ProfileStore]
 })
 export default class Profile {
-  protected readonly authStore = inject(AuthStore);
   protected readonly store = inject(ProfileStore);
-
-  private readonly user = this.authStore.user();
-
+  protected readonly ref = inject(MatDialogRef<Profile>, { optional: true });
+  protected readonly profileFormId = `${this.ref?.id ?? 'profile-page'}-editor-form`;
+  protected readonly passwordFormId = `${this.ref?.id ?? 'profile-page'}-password-form`;
+  private readonly auth = inject(AuthStore);
+  private readonly user = this.auth.user();
+  readonly isSaving = computed(
+    () => this.store.isUpdatingProfile() || this.store.isUpdatingProfileImage() || this.store.isUpdatingPassword()
+  );
+  protected readonly selectedTabIndex = signal(0);
+  protected readonly editingPassword = computed(() => this.selectedTabIndex() === 1);
   protected readonly profileImageUrl = computed(() => {
-    const user = this.authStore.user();
-    return user?.avatar ? `${environment.apiUrl}/uploads/profiles/${user.avatar}` : '/images/avatar.webp';
+    const avatar = this.auth.user()?.avatar;
+    return avatar
+      ? /^https?:\/\//i.test(avatar)
+        ? avatar
+        : `${environment.apiUrl}/uploads/profiles/${avatar}`
+      : '/images/avatar.webp';
   });
-
   protected readonly profileModel = signal<IProfileFormModel>({
     name: this.user?.name ?? '',
     email: this.user?.email ?? ''
   });
-
-  protected readonly profileForm = form(this.profileModel, (schemaPath) => {
-    required(schemaPath.name, { message: 'Le nom est requis.' });
-    required(schemaPath.email, { message: "L'adresse e-mail est requise." });
-    email(schemaPath.email, { message: "L'adresse e-mail est invalide." });
+  protected readonly profileForm = form(this.profileModel, (fields) => {
+    disabled(fields, () => this.isSaving());
+    required(fields.name, { message: 'Le nom est requis.' });
+    validate(fields.name, ({ value }) =>
+      value().trim() ? undefined : { kind: 'required', message: 'Le nom est requis.' }
+    );
+    required(fields.email, { message: 'L’adresse e-mail est requise.' });
+    email(fields.email, { message: 'L’adresse e-mail est invalide.' });
   });
-
-  protected readonly passwordModel = signal<IUpdatePasswordFormModel>({
-    password: '',
-    confirmPassword: ''
-  });
-
-  protected readonly passwordForm = form(this.passwordModel, (schemaPath) => {
-    required(schemaPath.password, { message: 'Le mot de passe est requis.' });
-    minLength(schemaPath.password, 8, { message: 'Le mot de passe doit contenir au moins 8 caractères.' });
-    required(schemaPath.confirmPassword, { message: 'La confirmation est requise.' });
-    validate(schemaPath.confirmPassword, ({ value, valueOf }) =>
-      value() !== valueOf(schemaPath.password)
-        ? { kind: 'password-match', message: 'Les mots de passe ne correspondent pas.' }
-        : undefined
+  protected readonly passwordModel = signal<IUpdatePasswordFormModel>({ password: '', confirmPassword: '' });
+  protected readonly passwordForm = form(this.passwordModel, (fields) => {
+    disabled(fields, () => this.isSaving());
+    required(fields.password, { message: 'Le mot de passe est requis.' });
+    minLength(fields.password, 8, { message: '8 caractères minimum.' });
+    required(fields.confirmPassword, { message: 'La confirmation est requise.' });
+    validate(fields.confirmPassword, ({ value, valueOf }) =>
+      value() === valueOf(fields.password)
+        ? undefined
+        : { kind: 'password-match', message: 'Les mots de passe ne correspondent pas.' }
     );
   });
-
   protected hidePassword = true;
   protected hidePasswordConfirmation = true;
 
   constructor() {
     effect(() => {
-      if (this.store.passwordUpdated()) {
+      if ((this.store.profileUpdated() || this.store.passwordUpdated()) && !this.isSaving()) this.ref?.close(true);
+    });
+    effect(() => {
+      if (!this.ref && this.store.passwordUpdated() && !this.isSaving()) {
         untracked(() => {
-          this.passwordModel.set({ password: '', confirmPassword: '' });
-          this.passwordForm().reset();
+          this.passwordForm().reset({ password: '', confirmPassword: '' });
+          this.hidePassword = true;
+          this.hidePasswordConfirmation = true;
         });
       }
     });
   }
 
-  protected onUpdateProfile(): void {
-    submit(this.profileForm, async (formState) => {
-      const value = formState().value();
+  protected onUpdateProfile(event: Event): void {
+    event.preventDefault();
+    if (this.isSaving()) return;
+    void submit(this.profileForm, async (state) => {
+      const value = state().value();
       const payload: components['schemas']['UpdateUserDto'] = {
         name: value.name.trim(),
         email: value.email.trim()
       };
-
       this.store.updateProfile(payload);
     });
   }
@@ -86,15 +96,25 @@ export default class Profile {
   protected onProfileImageSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const image = input.files?.[0];
-    if (!image) return;
-
-    this.store.updateProfileImage(image);
+    if (image && !this.isSaving()) this.store.updateProfileImage(image);
     input.value = '';
   }
 
-  protected onUpdatePassword(): void {
-    submit(this.passwordForm, async (formState) => {
-      this.store.updatePassword({ password: formState().value().password });
+  protected onTabChange(index: number): void {
+    this.selectedTabIndex.set(index);
+    if (index === 1) {
+      this.store.clearPasswordMessage();
+      this.passwordForm().reset({ password: '', confirmPassword: '' });
+      this.hidePassword = true;
+      this.hidePasswordConfirmation = true;
+    }
+  }
+
+  protected onUpdatePassword(event: Event): void {
+    event.preventDefault();
+    if (this.isSaving()) return;
+    void submit(this.passwordForm, async (state) => {
+      this.store.updatePassword({ password: state().value().password });
     });
   }
 }

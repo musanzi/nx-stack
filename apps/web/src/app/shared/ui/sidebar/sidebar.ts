@@ -11,7 +11,7 @@ import { User } from '../user/user';
 })
 export class Sidebar {
   readonly navigation = input.required<INavigationItem[]>();
-  readonly profileRoute = input.required<string>();
+  readonly editProfile = output<void>();
   readonly user = input.required<IUserSummary | null>();
   readonly signedOut = output<void>();
 }
