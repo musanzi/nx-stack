@@ -9,7 +9,7 @@ import type { components } from '@web/api-contracts';
 
 import { AuthStore } from '@web/domains/auth/shared/data-access';
 import { Message } from '@web/shared/ui';
-import { environment } from '@/environments/environment';
+import { environment } from '@web/environments/environment';
 
 import { ProfileStore } from '@web/domains/common/modules/profile/shared/data-access';
 import { IProfileFormModel, IUpdatePasswordFormModel } from '@web/domains/common/modules/profile/shared/interfaces';

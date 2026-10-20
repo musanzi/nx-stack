@@ -19,6 +19,7 @@
       "@core/*": ["./src/core/*"],
       "@web/domains/*": ["./src/app/domains/*"],
       "@web/shared/*": ["./src/app/shared/*"],
+      "@web/environments/*": ["./src/environments/*"],
       "@web/api-contracts": ["../../libs/api-contracts/src/index.ts"]
     }
   },

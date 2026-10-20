@@ -4,7 +4,7 @@ import { MatDivider } from '@angular/material/list';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
 import { IUserSummary } from '@web/shared/interfaces';
-import { environment } from '@/environments/environment';
+import { environment } from '@web/environments/environment';
 
 @Component({
   selector: 'user',

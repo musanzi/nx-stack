@@ -1,7 +1,7 @@
 import { HttpErrorResponse, HttpHandlerFn, HttpRequest, HttpResponse } from '@angular/common/http';
 import { catchError, from, map, mergeMap, throwError } from 'rxjs';
 import { isApiResponse, parseApiErrorBlob } from '@/app/core/api';
-import { environment } from '../../../environments/environment';
+import { environment } from '@web/environments/environment';
 
 export const httpInterceptor = (req: HttpRequest<unknown>, next: HttpHandlerFn) => {
   const newReq: HttpRequest<unknown> = req.clone({
