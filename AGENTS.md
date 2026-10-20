@@ -6,6 +6,7 @@ This Nx monorepo contains a NestJS API and an Angular web application. Applicati
 
 - Use pnpm and Nx from the workspace root.
 - Do not generate tests or database migrations.
+- Never start the application or Docker containers in the sandbox to verify changes. Use lint or build checks instead.
 - Follow the existing project structure, naming conventions, formatting, spacing, and code quality standards.
 - Keep implementations simple and practical. Avoid unnecessary abstractions and overengineering, and handle edge cases reasonably expected in actual application usage.
 - Apply the project-specific instructions below only within their respective paths.
