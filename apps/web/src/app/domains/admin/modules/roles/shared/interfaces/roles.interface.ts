@@ -1,4 +1,4 @@
-import type { components, operations } from '@web/api-contracts';
+import type { components, operations } from '@nx-stack/api-contracts';
 
 export interface IUpdateRoleCommand {
   id: components['schemas']['RoleResponse']['id'];

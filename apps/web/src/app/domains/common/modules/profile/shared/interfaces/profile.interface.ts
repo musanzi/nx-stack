@@ -1,4 +1,4 @@
-import type { components } from '@web/api-contracts';
+import type { components } from '@nx-stack/api-contracts';
 
 export type IProfileFormModel = Pick<components['schemas']['CreateUserDto'], 'name' | 'email'>;
 

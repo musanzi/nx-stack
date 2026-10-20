@@ -2,9 +2,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "skipLibCheck": true,
-    "experimentalDecorators": true,
     "paths": {
-      "@web/api-contracts": ["./libs/api-contracts/src/index.ts"]
+      "@nx-stack/api-contracts": ["./libs/api-contracts/src/index.ts"]
     }
   }
 }

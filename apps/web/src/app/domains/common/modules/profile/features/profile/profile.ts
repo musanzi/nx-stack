@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
-import type { components } from '@web/api-contracts';
+import type { components } from '@nx-stack/api-contracts';
 import { AuthStore } from '@web/domains/auth/shared/data-access';
 import { environment } from '@web/environments/environment';
 import { ProfileStore } from '@web/domains/common/modules/profile/shared/data-access';

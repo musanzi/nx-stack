@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import type { components, operations } from '@web/api-contracts';
+import type { components, operations } from '@nx-stack/api-contracts';
 import { catchError, concatMap, EMPTY, finalize, pipe, switchMap, tap } from 'rxjs';
 
 import { getApiErrorMessage } from '@/app/core/api';
