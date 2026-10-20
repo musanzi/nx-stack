@@ -1,8 +1,8 @@
 import { booleanAttribute, Component, computed, input, output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MESSAGE_STYLES } from '../../data';
-import { IMessageType } from '../../interfaces';
+import { MESSAGE_STYLES } from '@web/shared/data';
+import { IMessageType } from '@web/shared/interfaces';
 
 @Component({
   selector: 'message',

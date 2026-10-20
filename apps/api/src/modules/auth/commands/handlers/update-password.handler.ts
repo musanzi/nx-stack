@@ -1,9 +1,9 @@
 import { BadRequestException, Logger } from '@nestjs/common';
 import { CommandBus, CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
-import { IUserResponse } from '@/modules/users/interfaces';
-import { UpdateUser } from '@/modules/users/commands';
+import { IUserResponse } from '@api/modules/users/interfaces';
+import { UpdateUser } from '@api/modules/users/commands';
 import { UpdatePassword } from '../impl';
-import { FindUserByEmail } from '@/modules/users/queries';
+import { FindUserByEmail } from '@api/modules/users/queries';
 
 @CommandHandler(UpdatePassword)
 export class UpdatePasswordHandler implements ICommandHandler<UpdatePassword, IUserResponse> {

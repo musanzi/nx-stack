@@ -1,9 +1,9 @@
 import { BadRequestException, Logger } from '@nestjs/common';
 import { CommandBus, CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
-import { IUserResponse } from '@/modules/users/interfaces';
+import { IUserResponse } from '@api/modules/users/interfaces';
 import { SignUp } from '../impl';
-import { FindUserById } from '@/modules/users/queries';
-import { CreateUser } from '@/modules/users/commands';
+import { FindUserById } from '@api/modules/users/queries';
+import { CreateUser } from '@api/modules/users/commands';
 
 @CommandHandler(SignUp)
 export class SignUpHandler implements ICommandHandler<SignUp, IUserResponse> {

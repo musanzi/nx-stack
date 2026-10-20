@@ -10,7 +10,7 @@ import { provideTheming } from '@/app/core/theming';
 import { routes } from './app.routes';
 import { httpInterceptor } from './core/interceptors';
 import { PageTitleStrategy } from './core/strategies';
-import { AuthStore } from './domains/auth/data-access';
+import { AuthStore } from '@web/domains/auth/shared/data-access';
 
 export const appConfig: ApplicationConfig = {
   providers: [

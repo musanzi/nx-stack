@@ -1,7 +1,7 @@
 import { BadRequestException, Logger } from '@nestjs/common';
 import { CommandBus, CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { IUserResponse } from '@/modules/users/interfaces';
-import { UpdateUser } from '@/modules/users/commands';
+import { IUserResponse } from '@api/modules/users/interfaces';
+import { UpdateUser } from '@api/modules/users/commands';
 import { UpdateProfile } from '../impl';
 
 @CommandHandler(UpdateProfile)

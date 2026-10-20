@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterOutlet } from '@angular/router';
 
-import { PageLoader } from '@/app/shared/ui/page-loader/page-loader';
+import { PageLoader } from '@web/shared/ui';
 
 @Component({
   selector: 'auth-layout',

@@ -1,6 +1,6 @@
 import { Command } from '@nestjs/cqrs';
-import { User } from '@/modules/users/entities';
-import { IUserResponse } from '@/modules/users/interfaces';
+import { User } from '@api/modules/users/entities';
+import { IUserResponse } from '@api/modules/users/interfaces';
 import { UpdatePasswordDto } from '../../dto';
 
 export class UpdatePassword extends Command<IUserResponse> {

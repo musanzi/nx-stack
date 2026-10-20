@@ -1,7 +1,7 @@
 import { BadRequestException } from '@nestjs/common';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 import { MailerService } from '@nestjs-modules/mailer';
-import { buildEmailBody } from '@/shared/helpers';
+import { buildEmailBody } from '@api/shared/helpers';
 import { WelcomeUserEvent } from '../impl';
 
 @EventsHandler(WelcomeUserEvent)

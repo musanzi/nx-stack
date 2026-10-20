@@ -6,9 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 
-import { Message } from '@/app/shared/ui';
+import { Message } from '@web/shared/ui';
 
-import { SignUpStore } from '../../data-access/sign-up.store';
+import { SignUpStore } from '@web/domains/auth/modules/sign-up/shared/data-access';
 
 @Component({
   selector: 'auth-sign-up',

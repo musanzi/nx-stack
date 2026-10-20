@@ -1,8 +1,8 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AbstractController } from '@/shared/abstracts';
-import { HasRoles } from '@/modules/auth/decorators';
-import { Roles } from '@/modules/auth/enums';
+import { AbstractController } from '@api/shared/abstracts';
+import { HasRoles } from '@api/modules/auth/decorators';
+import { Roles } from '@api/modules/auth/enums';
 import { IStatItem, StatItem } from '../interfaces';
 import { FindStats } from '../queries';
 

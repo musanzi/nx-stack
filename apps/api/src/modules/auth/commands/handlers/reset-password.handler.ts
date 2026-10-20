@@ -2,8 +2,8 @@ import { BadRequestException, Logger } from '@nestjs/common';
 import { CommandBus, CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { IUserResponse } from '@/modules/users/interfaces';
-import { UpdateUser } from '@/modules/users/commands';
+import { IUserResponse } from '@api/modules/users/interfaces';
+import { UpdateUser } from '@api/modules/users/commands';
 import { ResetPassword } from '../impl';
 
 @CommandHandler(ResetPassword)

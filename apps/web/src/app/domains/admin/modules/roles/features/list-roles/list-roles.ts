@@ -5,13 +5,16 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import type { components } from '@nx-stack/api-contracts';
+import type { components } from '@web/api-contracts';
 import { filter } from 'rxjs';
 
-import { RolesStore } from '../../data-access/roles.store';
-import { IRemoveRoleDialogData, IRoleDialogData, IRoleDialogResult } from '../../interfaces';
-import { RemoveRoleDialog } from '../../ui/remove-role-dialog/remove-role-dialog';
-import { RoleFormDialog } from '../../ui/role-form-dialog/role-form-dialog';
+import { RolesStore } from '@web/domains/admin/modules/roles/shared/data-access';
+import {
+  IRemoveRoleDialogData,
+  IRoleDialogData,
+  IRoleDialogResult
+} from '@web/domains/admin/modules/roles/shared/interfaces';
+import { RemoveRoleDialog, RoleFormDialog } from '@web/domains/admin/modules/roles/shared/ui';
 
 @Component({
   imports: [DatePipe, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule],

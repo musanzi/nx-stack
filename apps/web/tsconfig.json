@@ -17,7 +17,9 @@
     "paths": {
       "@/*": ["./src/*"],
       "@core/*": ["./src/core/*"],
-      "@nx-stack/api-contracts": ["../../libs/api-contracts/src/index.ts"]
+      "@web/domains/*": ["./src/app/domains/*"],
+      "@web/shared/*": ["./src/app/shared/*"],
+      "@web/api-contracts": ["../../libs/api-contracts/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

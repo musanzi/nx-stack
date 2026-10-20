@@ -3,7 +3,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatDivider } from '@angular/material/list';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { RouterLink } from '@angular/router';
-import { IUserSummary } from '@/app/shared/interfaces';
+import { IUserSummary } from '@web/shared/interfaces';
 import { environment } from '@/environments/environment';
 
 @Component({

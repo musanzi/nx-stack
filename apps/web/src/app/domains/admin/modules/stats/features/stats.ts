@@ -4,7 +4,7 @@ import { Component, computed } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import type { components } from '@nx-stack/api-contracts';
+import type { components } from '@web/api-contracts';
 
 import { getApiErrorMessage } from '@/app/core/api';
 

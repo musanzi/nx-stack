@@ -6,9 +6,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import { Message } from '@/app/shared/ui';
+import { Message } from '@web/shared/ui';
 
-import { ResetPasswordStore } from '../../data-access/reset-password.store';
+import { ResetPasswordStore } from '@web/domains/auth/modules/reset-password/shared/data-access';
 
 @Component({
   selector: 'auth-reset-password',

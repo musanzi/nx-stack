@@ -9,7 +9,7 @@ import { IUserResponse } from '../../interfaces';
 import { FindUserById } from '../../queries';
 import { CreateUser } from '../impl';
 import { WelcomeUserEvent } from '../../events';
-import { FindRoleByName } from '@/modules/roles/queries';
+import { FindRoleByName } from '@api/modules/roles/queries';
 
 @CommandHandler(CreateUser)
 export class CreateUserHandler implements ICommandHandler<CreateUser, IUserResponse> {

@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Patch, Post, Req, Res, UseGuards } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AbstractController } from '@/shared/abstracts';
+import { AbstractController } from '@api/shared/abstracts';
 import { User } from '../../users/entities';
 import { IUserResponse, UserResponse } from '../../users/interfaces';
 import { UpdateUserDto } from '../../users/dto';

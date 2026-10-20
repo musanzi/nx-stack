@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { mapUsersRoles } from '../../helpers';
 import { User } from '../../entities';
 import { IUserResponse } from '../../interfaces';
-import { parsePaginationParams } from '@/shared/helpers';
+import { parsePaginationParams } from '@api/shared/helpers';
 import { FindUsers } from '../impl';
 
 @QueryHandler(FindUsers)

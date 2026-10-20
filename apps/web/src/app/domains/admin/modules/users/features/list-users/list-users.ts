@@ -7,13 +7,17 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import type { components } from '@nx-stack/api-contracts';
+import type { components } from '@web/api-contracts';
 import { filter } from 'rxjs';
 
-import { UsersStore } from '../../data-access/users.store';
-import { IUsersQueryParams, IRemoveUserDialogData, IUserDialogData, IUserDialogResult } from '../../interfaces';
-import { RemoveUserDialog } from '../../ui/remove-user-dialog/remove-user-dialog';
-import { UserFormDialog } from '../../ui/user-form-dialog/user-form-dialog';
+import { UsersStore } from '@web/domains/admin/modules/users/shared/data-access';
+import {
+  IUsersQueryParams,
+  IRemoveUserDialogData,
+  IUserDialogData,
+  IUserDialogResult
+} from '@web/domains/admin/modules/users/shared/interfaces';
+import { RemoveUserDialog, UserFormDialog } from '@web/domains/admin/modules/users/shared/ui';
 
 @Component({
   imports: [DatePipe, FormsModule, MatButtonModule, MatDialogModule, MatIconModule, MatPaginatorModule, MatTableModule],

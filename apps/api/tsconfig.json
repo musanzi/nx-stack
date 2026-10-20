@@ -23,8 +23,8 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
-      "@/modules/*": ["./src/modules/*"],
-      "@/shared/*": ["./src/shared/*"]
+      "@api/modules/*": ["./src/modules/*"],
+      "@api/shared/*": ["./src/shared/*"]
     },
     "tsBuildInfoFile": "../../out-tsc/api.tsbuildinfo"
   },

@@ -1,4 +1,4 @@
-import { IMessageType, IMessageStyle } from '../interfaces';
+import { IMessageType, IMessageStyle } from '@web/shared/interfaces';
 
 export const MESSAGE_STYLES: Record<IMessageType, IMessageStyle> = {
   success: {

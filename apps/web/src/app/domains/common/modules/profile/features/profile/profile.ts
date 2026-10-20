@@ -5,14 +5,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import type { components } from '@nx-stack/api-contracts';
+import type { components } from '@web/api-contracts';
 
-import { AuthStore } from '@/app/domains/auth/data-access';
-import { Message } from '@/app/shared/ui';
+import { AuthStore } from '@web/domains/auth/shared/data-access';
+import { Message } from '@web/shared/ui';
 import { environment } from '@/environments/environment';
 
-import { ProfileStore } from '../../data-access/profile.store';
-import { IProfileFormModel, IUpdatePasswordFormModel } from '../../interfaces';
+import { ProfileStore } from '@web/domains/common/modules/profile/shared/data-access';
+import { IProfileFormModel, IUpdatePasswordFormModel } from '@web/domains/common/modules/profile/shared/interfaces';
 
 @Component({
   imports: [Message, FormField, MatButtonModule, MatCardModule, MatFormFieldModule, MatIconModule, MatInputModule],

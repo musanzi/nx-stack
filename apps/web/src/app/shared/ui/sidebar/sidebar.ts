@@ -1,7 +1,6 @@
 import { Component, input, output } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IUserSummary } from '@/app/shared/interfaces';
-import { INavigationItem } from '../navigation/interfaces';
+import { INavigationItem, IUserSummary } from '@web/shared/interfaces';
 import { Navigation } from '../navigation/navigation';
 import { User } from '../user/user';
 

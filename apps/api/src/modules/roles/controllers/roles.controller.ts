@@ -1,12 +1,12 @@
 import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AbstractController } from '@/shared/abstracts';
-import { ApiPaginatedResponse } from '@/shared/decorators';
+import { AbstractController } from '@api/shared/abstracts';
+import { ApiPaginatedResponse } from '@api/shared/decorators';
 import { CreateRoleDto, FilterRolesDto, UpdateRoleDto } from '../dto';
 import { RoleResponse } from '../interfaces';
 import { Role } from '../entities';
-import { HasRoles } from '@/modules/auth/decorators';
-import { Roles } from '@/modules/auth/enums';
+import { HasRoles } from '@api/modules/auth/decorators';
+import { Roles } from '@api/modules/auth/enums';
 import { CreateRole, DeleteRole, UpdateRole } from '../commands';
 import { FindRoleById, FindRoles } from '../queries';
 

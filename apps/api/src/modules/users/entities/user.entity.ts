@@ -1,6 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany } from 'typeorm';
 import { Role } from '../../roles/entities';
-import { AbstractEntity } from '@/shared/abstracts';
+import { AbstractEntity } from '@api/shared/abstracts';
 
 @Entity()
 export class User extends AbstractEntity {

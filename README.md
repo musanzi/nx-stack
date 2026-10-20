@@ -63,14 +63,6 @@ Containers use `DB_HOST=db` and `REDIS_URL=redis://redis:6379`; browsers need a 
 
 Development Compose routes API email to MailHog at `mailhog:1025` without SMTP authentication. Open http://localhost:8025 to inspect welcome and password reset emails. Messages are stored in memory and cleared when MailHog restarts.
 
-For an API running on the host, start MailHog separately:
-
-```sh
-docker compose -f compose.dev.yml -p nx-stack up -d mailhog
-```
-
-Set `MAIL_HOST=localhost`, `MAIL_PORT=1025`, `MAIL_USERNAME=`, `MAIL_PASSWORD=`, and `MAIL_FROM=nx-stack Support <support@nx-stack.local>` in `.env`, then restart the API. These are the defaults in `.env.example`. MailHog's SMTP and web ports are bound to localhost.
-
 For production, configure your SMTP provider's host, port, credentials, and sender in `.env`. `MAIL_FROM` sets the sender; when omitted, it falls back to `MAIL_USERNAME`.
 
 ## License

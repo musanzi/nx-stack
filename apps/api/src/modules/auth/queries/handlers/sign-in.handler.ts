@@ -1,5 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { IUserResponse } from '@/modules/users/interfaces';
+import { IUserResponse } from '@api/modules/users/interfaces';
 import { SignIn } from '../impl';
 
 @QueryHandler(SignIn)

@@ -4,7 +4,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { IField, IForm, IFormAnswer, IFormAnswersModel, IFormResponses } from '@/app/shared/interfaces';
+import { IField, IForm, IFormAnswer, IFormAnswersModel, IFormResponses } from '@web/shared/interfaces';
 
 @Component({
   selector: 'form-renderer',

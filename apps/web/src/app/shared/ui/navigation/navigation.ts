@@ -6,7 +6,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIcon } from '@angular/material/icon';
 import { isActive, IsActiveMatchOptions, NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { filter, take } from 'rxjs';
-import { INavigationActiveOptions, INavigationItem } from './interfaces';
+import { INavigationActiveOptions, INavigationItem } from '@web/shared/interfaces';
 
 @Component({
   selector: 'navigation',

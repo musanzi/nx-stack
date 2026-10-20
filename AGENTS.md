@@ -41,6 +41,13 @@ The Angular frontend provides the user interface and consumes the API through ge
 
 Act as a senior Angular engineer and use Angular Material when creating UI elements.
 
+### Shared Imports
+
+- Import domain-level shared code through category barrel exports using `@web/domains/<domain>/shared/<category>`, for example `@web/domains/admin/shared/interfaces`, `@web/domains/admin/shared/ui`, or `@web/domains/admin/shared/data-access`.
+- Import app-wide shared code through `@web/shared/<category>`, for example `@web/shared/interfaces` or `@web/shared/ui`.
+- Add or update the category's `index.ts` when exposing shared code. Avoid relative imports across shared categories and imports that target individual implementation files. Keep imports within the same category relative to avoid importing its own barrel and creating circular dependencies.
+- Use the current `@web/*`, `@web/core/*`, `@web/domains/*`, and `@web/environments/*` aliases.
+
 ### Folder Structure
 
 - `data-access`: NgRx Signal Store for `POST`, `PATCH`, and `PUT` requests. Use `httpResource` for `GET` requests where there is no local state management.

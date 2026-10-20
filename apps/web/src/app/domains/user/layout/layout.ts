@@ -5,10 +5,10 @@ import { MatSidenav, MatSidenavContainer, MatSidenavContent } from '@angular/mat
 import { RouterOutlet } from '@angular/router';
 
 import { Media } from '@/app/core/media';
-import { AuthStore } from '@/app/domains/auth/data-access';
-import { PageLoader, Sidebar } from '@/app/shared/ui';
+import { AuthStore } from '@web/domains/auth/shared/data-access';
+import { PageLoader, Sidebar } from '@web/shared/ui';
 
-import { NAVIGATION } from './data/navigation';
+import { NAVIGATION } from '@web/domains/user/shared/data';
 
 @Component({
   selector: 'user-layout',

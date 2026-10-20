@@ -8,9 +8,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router, RouterLink } from '@angular/router';
 
-import { Message } from '@/app/shared/ui';
+import { Message } from '@web/shared/ui';
 
-import { SignInStore } from '../../data-access/sign-in.store';
+import { SignInStore } from '@web/domains/auth/modules/sign-in/shared/data-access';
 
 @Component({
   selector: 'auth-sign-in',

@@ -1,5 +1,5 @@
-import { IUserResponse } from '@/modules/users/interfaces';
-import { FindUserById } from '@/modules/users/queries';
+import { IUserResponse } from '@api/modules/users/interfaces';
+import { FindUserById } from '@api/modules/users/queries';
 import { Injectable } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
 import { PassportSerializer } from '@nestjs/passport';

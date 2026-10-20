@@ -1,7 +1,7 @@
 import { IQueryHandler, QueryBus, QueryHandler } from '@nestjs/cqrs';
-import { IUserResponse } from '@/modules/users/interfaces';
+import { IUserResponse } from '@api/modules/users/interfaces';
 import { GetProfile } from '../impl';
-import { FindUserByEmail } from '@/modules/users/queries';
+import { FindUserByEmail } from '@api/modules/users/queries';
 
 @QueryHandler(GetProfile)
 export class ProfileHandler implements IQueryHandler<GetProfile, IUserResponse> {

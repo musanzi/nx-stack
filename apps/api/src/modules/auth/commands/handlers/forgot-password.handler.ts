@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { ForgotPassword } from '../impl';
 import { ResetPasswordRequestedEvent } from '../../events';
-import { FindUserByEmail } from '@/modules/users/queries';
+import { FindUserByEmail } from '@api/modules/users/queries';
 
 @CommandHandler(ForgotPassword)
 export class ForgotPasswordHandler implements ICommandHandler<ForgotPassword, void> {

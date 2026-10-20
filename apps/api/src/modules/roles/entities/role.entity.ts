@@ -1,5 +1,5 @@
-import { AbstractEntity } from '@/shared/abstracts';
-import { User } from '@/modules/users/entities';
+import { AbstractEntity } from '@api/shared/abstracts';
+import { User } from '@api/modules/users/entities';
 import { Column, Entity, ManyToMany } from 'typeorm';
 
 @Entity()

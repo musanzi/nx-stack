@@ -1,5 +1,5 @@
 import { Query } from '@nestjs/cqrs';
-import { IUserResponse } from '@/modules/users/interfaces';
+import { IUserResponse } from '@api/modules/users/interfaces';
 
 export class ValidateCredentials extends Query<IUserResponse> {
   constructor(

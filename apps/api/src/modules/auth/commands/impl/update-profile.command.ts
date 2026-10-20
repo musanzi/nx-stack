@@ -1,7 +1,7 @@
 import { Command } from '@nestjs/cqrs';
-import { UpdateUserDto } from '@/modules/users/dto';
-import { User } from '@/modules/users/entities';
-import { IUserResponse } from '@/modules/users/interfaces';
+import { UpdateUserDto } from '@api/modules/users/dto';
+import { User } from '@api/modules/users/entities';
+import { IUserResponse } from '@api/modules/users/interfaces';
 
 export class UpdateProfile extends Command<IUserResponse> {
   constructor(

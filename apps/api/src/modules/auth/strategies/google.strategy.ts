@@ -4,8 +4,8 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-google-oauth20';
 import { IGoogleProfile } from '../interfaces';
 import { CommandBus } from '@nestjs/cqrs';
-import { FindOrCreateUser } from '@/modules/users/commands';
-import { IUserResponse } from '@/modules/users/interfaces';
+import { FindOrCreateUser } from '@api/modules/users/commands';
+import { IUserResponse } from '@api/modules/users/interfaces';
 
 @Injectable()
 export class GoogleStrategy extends PassportStrategy(Strategy) {
