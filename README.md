@@ -67,4 +67,4 @@ For production, configure your SMTP provider's host, port, credentials, and send
 
 ## License
 
-By [Wilfried Musanzi](https://musanzi.me) is licensed under the MIT license.
+By [Wilfried Musanzi](https://musanzi.me).
