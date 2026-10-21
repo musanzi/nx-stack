@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import type { components } from '@nx-stack/api-contracts';
 
-import { IRoleDialogData, IRoleDialogResult } from '@web/domains/admin/modules/roles/shared/interfaces';
+import { IRoleDialogData, IRoleDialogResult } from '@web/domains/admin/modules/roles/interfaces';
 
 @Component({
   imports: [FormField, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule],

@@ -1,4 +1,4 @@
-import { ISdg } from '@web/domains/website/modules/landing/shared/interfaces';
+import { ISdg } from '@web/domains/website/modules/landing/interfaces';
 
 export const sdgs: ISdg[] = [
   {

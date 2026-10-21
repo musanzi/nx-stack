@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
-import { IRemoveRoleDialogData } from '@web/domains/admin/modules/roles/shared/interfaces';
+import { IRemoveRoleDialogData } from '@web/domains/admin/modules/roles/interfaces';
 
 @Component({
   imports: [MatButtonModule, MatDialogModule],

@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 
 import { Message } from '@web/shared/ui';
 
-import { SignUpStore } from '@web/domains/auth/modules/sign-up/shared/data-access';
+import { SignUpStore } from '@web/domains/auth/modules/sign-up/data-access';
 
 @Component({
   selector: 'auth-sign-up',

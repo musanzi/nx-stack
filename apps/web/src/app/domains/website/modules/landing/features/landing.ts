@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { AuthStore } from '@web/domains/auth/shared/data-access';
-import { LandingCta, LandingFeatures, LandingHero } from '@web/domains/website/modules/landing/shared/ui';
+import { LandingCta, LandingFeatures, LandingHero } from '@web/domains/website/modules/landing/ui';
 
 @Component({
   selector: 'app-landing',

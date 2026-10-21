@@ -10,14 +10,14 @@ import { MatTableModule } from '@angular/material/table';
 import type { components } from '@nx-stack/api-contracts';
 import { filter } from 'rxjs';
 
-import { UsersStore } from '@web/domains/admin/modules/users/shared/data-access';
+import { UsersStore } from '@web/domains/admin/modules/users/data-access';
 import {
   IUsersQueryParams,
   IRemoveUserDialogData,
   IUserDialogData,
   IUserDialogResult
-} from '@web/domains/admin/modules/users/shared/interfaces';
-import { RemoveUserDialog, UserFormDialog } from '@web/domains/admin/modules/users/shared/ui';
+} from '@web/domains/admin/modules/users/interfaces';
+import { RemoveUserDialog, UserFormDialog } from '@web/domains/admin/modules/users/ui';
 
 @Component({
   imports: [DatePipe, FormsModule, MatButtonModule, MatDialogModule, MatIconModule, MatPaginatorModule, MatTableModule],

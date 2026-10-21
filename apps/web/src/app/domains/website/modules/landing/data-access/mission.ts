@@ -1,4 +1,4 @@
-import { IMission } from '@web/domains/website/modules/landing/shared/interfaces';
+import { IMission } from '@web/domains/website/modules/landing/interfaces';
 
 export const MISSIONS: IMission[] = [
   {

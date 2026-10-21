@@ -8,7 +8,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 
 import { Message } from '@web/shared/ui';
 
-import { ResetPasswordStore } from '@web/domains/auth/modules/reset-password/shared/data-access';
+import { ResetPasswordStore } from '@web/domains/auth/modules/reset-password/data-access';
 
 @Component({
   selector: 'auth-reset-password',

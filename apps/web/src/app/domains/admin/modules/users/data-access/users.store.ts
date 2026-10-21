@@ -13,7 +13,7 @@ import {
   IRemoveUserCommand,
   IUpdateUserCommand,
   IUsersState
-} from '@web/domains/admin/modules/users/shared/interfaces';
+} from '@web/domains/admin/modules/users/interfaces';
 
 const initialState: IUsersState = {
   users: [],

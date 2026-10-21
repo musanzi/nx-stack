@@ -9,8 +9,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import type { components } from '@nx-stack/api-contracts';
 import { AuthStore } from '@web/domains/auth/shared/data-access';
 import { environment } from '@web/environments/environment';
-import { ProfileStore } from '@web/domains/common/modules/profile/shared/data-access';
-import { IProfileFormModel, IUpdatePasswordFormModel } from '@web/domains/common/modules/profile/shared/interfaces';
+import { ProfileStore } from '@web/domains/common/modules/profile/data-access';
+import { IProfileFormModel, IUpdatePasswordFormModel } from '@web/domains/common/modules/profile/interfaces';
 
 @Component({
   imports: [FormField, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTabsModule],

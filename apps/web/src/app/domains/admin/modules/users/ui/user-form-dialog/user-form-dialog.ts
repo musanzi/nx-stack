@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 
-import { IUserDialogData, IUserDialogResult, IUserFormModel } from '@web/domains/admin/modules/users/shared/interfaces';
+import { IUserDialogData, IUserDialogResult, IUserFormModel } from '@web/domains/admin/modules/users/interfaces';
 
 @Component({
   imports: [FormField, MatButtonModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatSelectModule],

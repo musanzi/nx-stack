@@ -11,7 +11,7 @@ import {
   IRemoveRoleCommand,
   IRolesState,
   IUpdateRoleCommand
-} from '@web/domains/admin/modules/roles/shared/interfaces';
+} from '@web/domains/admin/modules/roles/interfaces';
 
 const initialState: IRolesState = {
   roles: [],

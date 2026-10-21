@@ -8,13 +8,13 @@ import { MatTableModule } from '@angular/material/table';
 import type { components } from '@nx-stack/api-contracts';
 import { filter } from 'rxjs';
 
-import { RolesStore } from '@web/domains/admin/modules/roles/shared/data-access';
+import { RolesStore } from '@web/domains/admin/modules/roles/data-access';
 import {
   IRemoveRoleDialogData,
   IRoleDialogData,
   IRoleDialogResult
-} from '@web/domains/admin/modules/roles/shared/interfaces';
-import { RemoveRoleDialog, RoleFormDialog } from '@web/domains/admin/modules/roles/shared/ui';
+} from '@web/domains/admin/modules/roles/interfaces';
+import { RemoveRoleDialog, RoleFormDialog } from '@web/domains/admin/modules/roles/ui';
 
 @Component({
   imports: [DatePipe, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule],

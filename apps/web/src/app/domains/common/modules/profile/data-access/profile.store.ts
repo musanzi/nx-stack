@@ -8,7 +8,7 @@ import { catchError, concatMap, EMPTY, finalize, pipe, tap } from 'rxjs';
 import { getApiErrorMessage } from '@/app/core/api';
 import { AuthStore } from '@web/domains/auth/shared/data-access';
 
-import { IProfileState } from '@web/domains/common/modules/profile/shared/interfaces';
+import { IProfileState } from '@web/domains/common/modules/profile/interfaces';
 
 const initialState: IProfileState = {
   isUpdatingProfile: false,

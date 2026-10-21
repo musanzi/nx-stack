@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 
 import { Message } from '@web/shared/ui';
 
-import { ForgotPasswordStore } from '@web/domains/auth/modules/forgot-password/shared/data-access';
+import { ForgotPasswordStore } from '@web/domains/auth/modules/forgot-password/data-access';
 
 @Component({
   selector: 'auth-forgot-password',

@@ -10,7 +10,7 @@ import { Router, RouterLink } from '@angular/router';
 
 import { Message } from '@web/shared/ui';
 
-import { SignInStore } from '@web/domains/auth/modules/sign-in/shared/data-access';
+import { SignInStore } from '@web/domains/auth/modules/sign-in/data-access';
 
 @Component({
   selector: 'auth-sign-in',
