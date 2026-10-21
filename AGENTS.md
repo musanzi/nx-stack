@@ -1,41 +1,24 @@
-# Workspace
+# Agent Guidelines
 
-Nx monorepo: NestJS (`apps/api`), Angular (`apps/web`), and generated OpenAPI contracts (`libs/api-contracts`). Apply path-specific rules only to relevant files.
+## Working Principles
 
-## General
+- Inspect the repository structure, scripts, and nearby code before editing. Follow existing conventions rather than introducing new patterns.
+- Make the smallest complete change that solves the task. Keep code readable, maintainable, and appropriately defensive; avoid speculative features and abstractions.
+- Respect module boundaries and existing public APIs. Do not refactor unrelated code or add dependencies/tools without a clear need.
+- Do not generate tests or database migrations unless explicitly requested. If a migration is needed, report it for manual creation.
+- Never hand-edit generated code. Use the repository's generation scripts when source changes require updated artifacts.
 
-- Use pnpm and Nx from the workspace root.
-- Follow existing architecture, conventions, and formatting.
-- Prefer simple, maintainable solutions; avoid overengineering and handle realistic edge cases.
-- Do not generate tests or database migrations.
-- Verify changes efficiently: review the diff, run `git diff --check`, then targeted lint/typecheck when relevant. Check only affected projects, limit parallelism to 1, and keep caching enabled. Avoid unnecessary builds, tests, watch processes, Docker, and tool installations. Fix only introduced errors; report verification results and skipped checks.
+## Stack-Specific Rules (Only When Applicable)
 
-## API — `apps/api`
+- **NestJS:** Follow existing module structure and CQRS conventions. Use queries for reads, commands for mutations, and events only for useful decoupling. Access another module's data through its public operations, not its repositories. Keep reusable types in the designated interfaces folder.
+- **Angular:** Follow existing domain/feature structure and import aliases. Use public barrel exports across feature/category boundaries and relative imports within a category. Keep presentational UI separate from state/data access. Reuse the project's UI library and data-access patterns; prefer lightweight reads over unnecessary state management.
+- **OpenAPI:** Regenerate client contracts with the existing script (e.g., `pnpm generate:api`) when API changes require it; never edit generated types manually.
+- **Nx/pnpm:** Run commands from the workspace root, target only relevant projects, limit task parallelism to 1, and keep caching enabled.
+- **Docker:** Reuse running containers when useful. Do not start, restart, or rebuild containers solely for verification or contract generation. Rebuild only if runtime changes actually require it.
 
-- Follow existing NestJS CQRS patterns: queries for reads, commands for mutations, events only when useful.
-- Respect module boundaries: never access another module's repository directly; use its commands or queries.
-- Follow the existing module structure:
-  - `queries/{impl,handlers}` — read operations.
-  - `commands/{impl,handlers}` — write operations.
-  - `controllers`, `dto`, `entities`, `interfaces`, `helpers` — respective responsibilities.
-- Keep shared types/interfaces in `interfaces`, not inline in controllers, handlers, commands, queries, or events.
+## Verification & Delivery
 
-## Web — `apps/web`
-
-- Use Angular Material and existing Angular conventions.
-- Organize modules under `domains/<domain>/modules/<module>/`:
-  - `data-access`: NgRx Signal Store for mutations; `httpResource` for GET requests without local state.
-  - `features`: feature-level views and orchestration.
-  - `interfaces`: types/interfaces prefixed with `I`, never defined inline in components or services.
-  - `ui`: presentational components without direct store access; avoid gradients and prefer `rounded-md` cards.
-- Keep domain-wide shared code in `domains/<domain>/shared`, never inside individual modules.
-- Use category barrel exports (`index.ts`) for cross-category imports:
-  - `@web/domains/<domain>/shared/<category>`
-  - `@web/domains/<domain>/modules/<module>/<category>`
-  - `@web/shared/<category>`
-- Use relative imports within the same category to avoid circular dependencies. Avoid deep imports into other categories. Preserve existing `@web/*`, `@web/core/*`, and `@web/environments/*` aliases.
-
-## API Contracts — `libs/api-contracts`
-
-- Never edit generated files manually.
-- Regenerate contracts using `pnpm generate:api` from the workspace root when API changes require it.
+- Review the final diff and run `git diff --check` when Git is available.
+- Run the cheapest meaningful verification for changed code (targeted lint, typecheck, or equivalent). Escalate to affected builds only when necessary; avoid workspace-wide checks, tests, watch processes, and tool installation by default.
+- Fix errors introduced by the change, not unrelated issues. Do not repeatedly rerun a failing command without changing the cause.
+- Finish with a concise summary of changes, checks that actually ran, results, and anything unverified. Never claim a skipped check passed.
