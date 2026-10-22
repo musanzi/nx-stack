@@ -55,7 +55,10 @@
             <p role="status" class="sr-only">Envoi de la photo de profil…</p>
           }
           @if (store.profileImageError()) {
-            <p role="alert" class="mb-4 text-sm text-error">{{ store.profileImageError() }}</p>
+            <message
+              class="mb-4"
+              [message]="store.profileImageError()"
+              (dismissed)="store.clearProfileImageMessage()" />
           }
           <form [id]="profileFormId" class="flex flex-col gap-4" (submit)="onUpdateProfile($event)">
             <mat-form-field subscriptSizing="dynamic">
@@ -76,7 +79,7 @@
               <p role="status" class="text-sm text-primary">Vos informations ont bien été enregistrées.</p>
             }
             @if (store.profileError()) {
-              <p role="alert" class="text-sm text-error">{{ store.profileError() }}</p>
+              <message [message]="store.profileError()" (dismissed)="store.clearProfileMessage()" />
             }
           </form>
         </div>
@@ -130,7 +133,7 @@
               <p role="status" class="text-sm text-primary">Votre nouveau mot de passe est maintenant actif.</p>
             }
             @if (store.passwordError()) {
-              <p role="alert" class="text-sm text-error">{{ store.passwordError() }}</p>
+              <message [message]="store.passwordError()" (dismissed)="store.clearPasswordMessage()" />
             }
           </form>
         </div>

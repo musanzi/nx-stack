@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import type { components } from '@nx-stack/api-contracts';
+import type { IUpdatePasswordDto, IUpdateUserDto, IUserResponse } from '@nx-stack/api-contracts';
 import { catchError, concatMap, EMPTY, finalize, pipe, tap } from 'rxjs';
 
 import { getApiErrorMessage } from '@/app/core/api';
@@ -29,11 +29,11 @@ export const ProfileStore = signalStore(
     _http: inject(HttpClient)
   })),
   withMethods(({ _authStore, _http, ...store }) => ({
-    updateProfile: rxMethod<components['schemas']['UpdateUserDto']>(
+    updateProfile: rxMethod<IUpdateUserDto>(
       pipe(
         concatMap((payload) => {
           patchState(store, { isUpdatingProfile: true, profileUpdated: false, profileError: '' });
-          return _http.patch<components['schemas']['UserResponse']>('/auth/me/update', payload).pipe(
+          return _http.patch<IUserResponse>('/auth/me/update', payload).pipe(
             tap((user) => {
               _authStore.setUser(user);
               patchState(store, { profileUpdated: true });
@@ -56,7 +56,7 @@ export const ProfileStore = signalStore(
           const body = new FormData();
           body.append('avatar', image);
 
-          return _http.post<components['schemas']['UserResponse']>('/users/profile/avatar', body).pipe(
+          return _http.post<IUserResponse>('/users/profile/avatar', body).pipe(
             tap((user) => {
               _authStore.setUser(user);
               patchState(store, { profileImageUpdated: true });
@@ -75,11 +75,11 @@ export const ProfileStore = signalStore(
         })
       )
     ),
-    updatePassword: rxMethod<components['schemas']['UpdatePasswordDto']>(
+    updatePassword: rxMethod<IUpdatePasswordDto>(
       pipe(
         concatMap((payload) => {
           patchState(store, { isUpdatingPassword: true, passwordUpdated: false, passwordError: '' });
-          return _http.patch<components['schemas']['UserResponse']>('/auth/password/update', payload).pipe(
+          return _http.patch<IUserResponse>('/auth/password/update', payload).pipe(
             tap((user) => {
               _authStore.setUser(user);
               patchState(store, { passwordUpdated: true });

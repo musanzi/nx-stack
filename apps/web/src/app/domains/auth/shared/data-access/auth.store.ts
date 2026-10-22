@@ -3,7 +3,7 @@ import { computed, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { patchState, signalStore, withComputed, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import type { components } from '@nx-stack/api-contracts';
+import type { IUserResponse } from '@nx-stack/api-contracts';
 import { catchError, exhaustMap, map, of, pipe, tap } from 'rxjs';
 
 import { IAuthState } from '@web/domains/auth/shared/interfaces';
@@ -25,7 +25,7 @@ export const AuthStore = signalStore(
   })),
   withMethods(({ _http, _router, ...store }) => ({
     initialize: () => {
-      return _http.get<components['schemas']['UserResponse']>('/auth/me').pipe(
+      return _http.get<IUserResponse>('/auth/me').pipe(
         map((user) => {
           patchState(store, { user });
           return user;
@@ -51,7 +51,7 @@ export const AuthStore = signalStore(
         )
       )
     ),
-    setUser: (user: components['schemas']['UserResponse'] | null) => {
+    setUser: (user: IUserResponse | null) => {
       patchState(store, { user });
     }
   }))

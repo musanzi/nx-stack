@@ -1,36 +1,31 @@
 import { DatePipe } from '@angular/common';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
-import type { components } from '@nx-stack/api-contracts';
+import type { IRoleResponse } from '@nx-stack/api-contracts';
 import { filter } from 'rxjs';
 
-import { RolesStore } from '@web/domains/admin/modules/roles/data-access';
-import {
-  IRemoveRoleDialogData,
-  IRoleDialogData,
-  IRoleDialogResult
-} from '@web/domains/admin/modules/roles/interfaces';
+import { Message } from '@web/shared/ui';
+
+import { RolesService, RolesStore } from '@web/domains/admin/modules/roles/data-access';
+import { IRemoveRoleDialogData, IRoleDialogData, IRoleDialogResult } from '@web/domains/admin/modules/roles/interfaces';
 import { RemoveRoleDialog, RoleFormDialog } from '@web/domains/admin/modules/roles/ui';
 
 @Component({
-  imports: [DatePipe, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule],
+  imports: [DatePipe, MatButtonModule, MatDialogModule, MatIconModule, MatTableModule, Message],
   templateUrl: './list-roles.html',
-  providers: [RolesStore]
+  providers: [RolesService, RolesStore]
 })
-export default class Roles implements OnInit {
+export default class Roles {
+  protected readonly data = inject(RolesService);
   protected readonly store = inject(RolesStore);
   private readonly dialog = inject(MatDialog);
   private readonly destroyRef = inject(DestroyRef);
 
   protected readonly displayedColumns = ['name', 'createdAt', 'updatedAt', 'actions'];
-
-  ngOnInit(): void {
-    this.store.loadRoles();
-  }
 
   protected openCreateDialog(): void {
     this.dialog
@@ -46,7 +41,7 @@ export default class Roles implements OnInit {
       .subscribe(({ payload }) => this.store.createRole(payload));
   }
 
-  protected openUpdateDialog(role: components['schemas']['RoleResponse']): void {
+  protected openUpdateDialog(role: IRoleResponse): void {
     this.dialog
       .open<RoleFormDialog, IRoleDialogData, IRoleDialogResult>(RoleFormDialog, {
         data: { role },
@@ -60,7 +55,7 @@ export default class Roles implements OnInit {
       .subscribe(({ payload }) => this.store.updateRole({ id: role.id, payload }));
   }
 
-  protected openRemoveDialog(role: components['schemas']['RoleResponse']): void {
+  protected openRemoveDialog(role: IRoleResponse): void {
     this.dialog
       .open<RemoveRoleDialog, IRemoveRoleDialogData, boolean>(RemoveRoleDialog, {
         data: { role },

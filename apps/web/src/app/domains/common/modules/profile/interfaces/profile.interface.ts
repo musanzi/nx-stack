@@ -1,8 +1,8 @@
-import type { components } from '@nx-stack/api-contracts';
+import type { ICreateUserDto, IUpdatePasswordDto } from '@nx-stack/api-contracts';
 
-export type IProfileFormModel = Pick<components['schemas']['CreateUserDto'], 'name' | 'email'>;
+export type IProfileFormModel = Pick<ICreateUserDto, 'name' | 'email'>;
 
-export type IUpdatePasswordFormModel = components['schemas']['UpdatePasswordDto'] & {
+export type IUpdatePasswordFormModel = IUpdatePasswordDto & {
   confirmPassword: string;
 };
 

@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import type { components } from '@nx-stack/api-contracts';
+import type { IForgotPasswordDto } from '@nx-stack/api-contracts';
 import { catchError, concatMap, EMPTY, finalize, pipe, tap } from 'rxjs';
 
 import { getApiErrorMessage } from '@/app/core/api';
@@ -15,7 +15,7 @@ export const ForgotPasswordStore = signalStore(
     _router: inject(Router)
   })),
   withMethods(({ _http, _router, ...store }) => ({
-    forgotPassword: rxMethod<components['schemas']['ForgotPasswordDto']>(
+    forgotPassword: rxMethod<IForgotPasswordDto>(
       pipe(
         concatMap((payload) => {
           patchState(store, { isLoading: true, error: '' });

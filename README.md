@@ -44,7 +44,7 @@ Database commands build the API first; migrations and seeds never run automatica
 
 With the API running, use `pnpm generate:api` to regenerate types or `pnpm sync:api` to regenerate and build the web app. The default source is http://localhost:8000/openapi.json; override it with `OPENAPI_INPUT` for another URL or a local JSON/YAML file.
 
-Import `components`, `operations`, and `paths` from `@nx-stack/api-contracts`. Commit generated changes; never edit them manually. Builds use committed contracts without requiring a running API.
+Import named types such as `IUserResponse` and `ICreateUserDto` from `@nx-stack/api-contracts`. The generator creates these aliases alongside `components`, `operations`, and `paths`. Use `IPage<T>` from the admin shared interfaces for paginated lists. Commit generated changes; never edit them manually. Builds use committed contracts without requiring a running API.
 
 ## Configuration and Docker
 

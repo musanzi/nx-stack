@@ -1,27 +1,25 @@
-import type { components, operations } from '@nx-stack/api-contracts';
+import type { ICreateRoleDto, IRoleResponse, IUpdateRoleDto } from '@nx-stack/api-contracts';
 
 export interface IUpdateRoleCommand {
-  id: components['schemas']['RoleResponse']['id'];
-  payload: components['schemas']['UpdateRoleDto'];
+  id: IRoleResponse['id'];
+  payload: IUpdateRoleDto;
 }
 
-export type IRemoveRoleCommand = Pick<components['schemas']['RoleResponse'], 'id'>;
+export type IRemoveRoleCommand = Pick<IRoleResponse, 'id'>;
 
 export interface IRoleDialogData {
-  role?: components['schemas']['RoleResponse'];
+  role?: IRoleResponse;
 }
 
 export interface IRoleDialogResult {
-  payload: components['schemas']['CreateRoleDto'];
+  payload: ICreateRoleDto;
 }
 
 export interface IRemoveRoleDialogData {
-  role: components['schemas']['RoleResponse'];
+  role: IRoleResponse;
 }
 
 export interface IRolesState {
-  roles: operations['RolesController_findAll']['responses'][200]['content']['application/json']['data'][0];
-  isLoading: boolean;
   isSaving: boolean;
   removingRoleId: string;
   error: string;

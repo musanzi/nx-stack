@@ -6,14 +6,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
-import type { components } from '@nx-stack/api-contracts';
+import type { IUpdateUserDto } from '@nx-stack/api-contracts';
+import { Message } from '@web/shared/ui';
 import { AuthStore } from '@web/domains/auth/shared/data-access';
 import { environment } from '@web/environments/environment';
 import { ProfileStore } from '@web/domains/common/modules/profile/data-access';
 import { IProfileFormModel, IUpdatePasswordFormModel } from '@web/domains/common/modules/profile/interfaces';
 
 @Component({
-  imports: [FormField, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTabsModule],
+  imports: [FormField, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatTabsModule, Message],
   templateUrl: './profile.html',
   providers: [ProfileStore]
 })
@@ -85,7 +86,7 @@ export default class Profile {
     if (this.isSaving()) return;
     void submit(this.profileForm, async (state) => {
       const value = state().value();
-      const payload: components['schemas']['UpdateUserDto'] = {
+      const payload: IUpdateUserDto = {
         name: value.name.trim(),
         email: value.email.trim()
       };

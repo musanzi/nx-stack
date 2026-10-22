@@ -15,7 +15,7 @@ const routes: Routes = [
       {
         path: 'users',
         title: 'Users',
-        loadComponent: () => import('./modules/users/features/list-users/list-users')
+        loadComponent: () => import('./modules/users/features/users-list/users-list')
       },
       {
         path: 'roles',

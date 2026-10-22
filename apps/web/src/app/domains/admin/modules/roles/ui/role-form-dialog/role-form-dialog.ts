@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import type { components } from '@nx-stack/api-contracts';
+import type { ICreateRoleDto } from '@nx-stack/api-contracts';
 
 import { IRoleDialogData, IRoleDialogResult } from '@web/domains/admin/modules/roles/interfaces';
 
@@ -16,7 +16,7 @@ export class RoleFormDialog {
   protected readonly data = inject<IRoleDialogData>(MAT_DIALOG_DATA);
   private readonly dialogRef = inject(MatDialogRef<RoleFormDialog, IRoleDialogResult>);
 
-  protected readonly roleModel = signal<components['schemas']['CreateRoleDto']>({ name: this.data.role?.name ?? '' });
+  protected readonly roleModel = signal<ICreateRoleDto>({ name: this.data.role?.name ?? '' });
   protected readonly roleForm = form(this.roleModel, (schemaPath) => {
     required(schemaPath.name, { message: 'Name is required.' });
     validate(schemaPath.name, ({ value }) => {
