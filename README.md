@@ -64,7 +64,3 @@ Containers use `DB_HOST=db` and `REDIS_URL=redis://redis:6379`; browsers need a 
 Development Compose routes API email to MailHog at `mailhog:1025` without SMTP authentication. Open http://localhost:8025 to inspect welcome and password reset emails. Messages are stored in memory and cleared when MailHog restarts.
 
 For production, configure your SMTP provider's host, port, credentials, and sender in `.env`. `MAIL_FROM` sets the sender; when omitted, it falls back to `MAIL_USERNAME`.
-
-## License
-
-By [Wilfried Musanzi](https://musanzi.me).
