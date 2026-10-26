@@ -1,6 +1,7 @@
 import { BadRequestException, Logger, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { promises } from 'fs';
+import { getUploadsPath } from '@api/shared/config';
 import { IUserResponse } from '../../interfaces';
 import { UploadUserAvatar } from '../impl';
 import { Repository } from 'typeorm';
@@ -25,7 +26,7 @@ export class UploadUserAvatarHandler implements ICommandHandler<UploadUserAvatar
       const user = await this.queryBus.execute(new FindUserById(userId));
 
       if (user.avatar) {
-        await promises.rm(`./uploads/profiles/${user.avatar}`, { force: true });
+        await promises.rm(getUploadsPath('profiles', user.avatar), { force: true });
       }
 
       await this.repository.update(user.id, { avatar: file.filename });

@@ -3,7 +3,7 @@ import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { AuthModule } from './modules/auth';
 import { DatabaseModule } from './modules/database';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { join } from 'path';
+import { getUploadsPath } from './shared/config';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AuthGuard, RolesGuard } from './modules/auth/guards';
@@ -57,7 +57,7 @@ import { ApiResponseInterceptor } from './shared/interceptors';
       }
     }),
     ServeStaticModule.forRoot({
-      rootPath: join(process.cwd(), 'uploads'),
+      rootPath: getUploadsPath(),
       serveRoot: '/uploads'
     }),
     JwtModule.registerAsync({

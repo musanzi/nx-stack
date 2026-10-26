@@ -6,6 +6,8 @@ services:
       target: api-production
     restart: unless-stopped
     env_file: ./.env
+    environment:
+      UPLOADS_DIR: /app/apps/api/uploads
     networks:
       - nx-stack
     ports:

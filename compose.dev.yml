@@ -6,6 +6,8 @@ services:
       target: api-development
     restart: unless-stopped
     env_file: ./.env
+    environment:
+      UPLOADS_DIR: /app/apps/api/uploads
     ports:
       - ${API_PORT:-8000}:${API_PORT}
     volumes:

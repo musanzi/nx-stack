@@ -76,7 +76,7 @@ export class UsersController extends AbstractController {
   }
 
   @Post('profile/avatar')
-  @UseInterceptors(FileInterceptor('avatar', createDiskUploadOptions('./uploads/profiles')))
+  @UseInterceptors(FileInterceptor('avatar', createDiskUploadOptions('profiles')))
   @ApiOperation({ summary: 'Upload the current user avatar' })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
