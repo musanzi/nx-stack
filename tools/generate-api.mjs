@@ -5,7 +5,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import openapiTS, { astToString } from 'openapi-typescript';
 import ts from 'typescript';
 
-const input = process.env.OPENAPI_INPUT ?? 'http://localhost:8000/openapi.json';
+const input =
+  process.env.OPENAPI_INPUT ?? fileURLToPath(new URL('../libs/api-contracts/openapi.json', import.meta.url));
 const source = /^https?:\/\//i.test(input) ? new URL(input) : pathToFileURL(resolve(input));
 const root = new URL('../libs/api-contracts/src/', import.meta.url);
 const temporarySuffix = `.${randomUUID()}.tmp`;

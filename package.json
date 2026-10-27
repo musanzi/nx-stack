@@ -18,14 +18,15 @@
     "build": "nx run-many -t build -p api web",
     "lint": "nx run-many -t lint -p api web api-contracts",
     "generate:api": "nx run api-contracts:generate",
-    "sync:api": "pnpm generate:api && nx build web",
+    "sync:api": "nx build web",
     "start:api": "nx run api:start",
     "start:web": "nx run web:start",
     "db:migrate": "nx run api:db-migrate",
     "db:up": "nx run api:db-up",
     "db:down": "nx run api:db-down",
     "db:seed": "nx run api:db-seed",
-    "prepare": "husky"
+    "prepare": "husky",
+    "typecheck": "nx run-many -t typecheck -p api web api-contracts"
   },
   "dependencies": {
     "@angular/aria": "22.1.0",

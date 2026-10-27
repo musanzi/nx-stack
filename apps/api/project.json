@@ -70,6 +70,21 @@
       },
       "dependsOn": ["build"],
       "cache": false
+    },
+    "openapi": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node dist/apps/api/src/export-openapi.js"
+      },
+      "dependsOn": ["build"],
+      "cache": false,
+      "outputs": ["{workspaceRoot}/libs/api-contracts/openapi.json"]
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "tsc --noEmit --incremental false -p apps/api/tsconfig.build.json"
+      }
     }
   }
 }

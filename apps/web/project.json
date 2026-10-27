@@ -53,7 +53,8 @@
       },
       "defaultConfiguration": "production",
       "executor": "@angular/build:application",
-      "outputs": ["{workspaceRoot}/dist/apps/web"]
+      "outputs": ["{workspaceRoot}/dist/apps/web"],
+      "dependsOn": ["^generate"]
     },
     "serve": {
       "configurations": {
@@ -66,7 +67,8 @@
       },
       "defaultConfiguration": "development",
       "executor": "@angular/build:dev-server",
-      "continuous": true
+      "continuous": true,
+      "dependsOn": ["^generate"]
     },
     "lint": {
       "executor": "nx:run-commands",
@@ -80,6 +82,14 @@
       "options": {
         "command": "node dist/apps/web/server/server.mjs"
       }
+    },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ngc --noEmit -p apps/web/tsconfig.app.json"
+      },
+      "dependsOn": ["^generate"]
     }
-  }
+  },
+  "implicitDependencies": ["api-contracts"]
 }
