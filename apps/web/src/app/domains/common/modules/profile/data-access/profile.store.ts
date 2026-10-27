@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { patchState, signalStore, withMethods, withProps, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import type { IUpdatePasswordDto, IUpdateUserDto, IUserResponse } from '@nx-stack/api-contracts';
+import type { IUpdatePasswordDto, IUpdateProfileDto, IUserResponse } from '@nx-stack/api-contracts';
 import { catchError, concatMap, EMPTY, finalize, pipe, tap } from 'rxjs';
 
 import { getApiErrorMessage } from '@/app/core/api';
@@ -29,7 +29,7 @@ export const ProfileStore = signalStore(
     _http: inject(HttpClient)
   })),
   withMethods(({ _authStore, _http, ...store }) => ({
-    updateProfile: rxMethod<IUpdateUserDto>(
+    updateProfile: rxMethod<IUpdateProfileDto>(
       pipe(
         concatMap((payload) => {
           patchState(store, { isUpdatingProfile: true, profileUpdated: false, profileError: '' });

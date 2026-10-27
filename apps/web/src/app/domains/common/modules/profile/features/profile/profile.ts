@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
-import type { IUpdateUserDto } from '@nx-stack/api-contracts';
+import type { IUpdateProfileDto } from '@nx-stack/api-contracts';
 import { Message } from '@web/shared/ui';
 import { AuthStore } from '@web/domains/auth/shared/data-access';
 import { environment } from '@web/environments/environment';
@@ -86,7 +86,7 @@ export default class Profile {
     if (this.isSaving()) return;
     void submit(this.profileForm, async (state) => {
       const value = state().value();
-      const payload: IUpdateUserDto = {
+      const payload: IUpdateProfileDto = {
         name: value.name.trim(),
         email: value.email.trim()
       };

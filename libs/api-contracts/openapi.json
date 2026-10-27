@@ -387,7 +387,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateUserDto"
+                "$ref": "#/components/schemas/UpdateProfileDto"
               }
             }
           }
@@ -1287,7 +1287,7 @@
           "password"
         ]
       },
-      "UpdateUserDto": {
+      "UpdateProfileDto": {
         "type": "object",
         "properties": {
           "email": {
@@ -1298,24 +1298,6 @@
           "name": {
             "type": "string",
             "example": "John Doe"
-          },
-          "password": {
-            "type": "string",
-            "example": "newSecret123"
-          },
-          "avatar": {
-            "type": "string",
-            "example": "https://example.com/avatar.png"
-          },
-          "roles": {
-            "example": [
-              "b7f2c1e0-4a5d-4c8e-9f1a-2b3c4d5e6f7a"
-            ],
-            "type": "array",
-            "items": {
-              "type": "string",
-              "format": "uuid"
-            }
           }
         }
       },
@@ -1398,6 +1380,38 @@
           "email",
           "name"
         ]
+      },
+      "UpdateUserDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john.doe@example.com"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Doe"
+          },
+          "password": {
+            "type": "string",
+            "example": "newSecret123"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://example.com/avatar.png"
+          },
+          "roles": {
+            "example": [
+              "b7f2c1e0-4a5d-4c8e-9f1a-2b3c4d5e6f7a"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        }
       },
       "CreateRoleDto": {
         "type": "object",

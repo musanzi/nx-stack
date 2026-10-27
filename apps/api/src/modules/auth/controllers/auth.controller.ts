@@ -4,8 +4,7 @@ import { ApiBody, ApiCreatedResponse, ApiOkResponse, ApiOperation, ApiTags } fro
 import { AbstractController } from '@api/shared/abstracts';
 import { User } from '../../users/entities';
 import { IUserResponse, UserResponse } from '../../users/interfaces';
-import { UpdateUserDto } from '../../users/dto';
-import { ForgotPasswordDto, ResetPasswordDto, SignInDto, SignUpDto, UpdatePasswordDto } from '../dto';
+import { ForgotPasswordDto, ResetPasswordDto, SignInDto, SignUpDto, UpdatePasswordDto, UpdateProfileDto } from '../dto';
 import { CurrentUser, Public } from '../decorators';
 import { GoogleAuthGuard, LocalAuthGuard } from '../guards';
 import { ForgotPassword, ResetPassword, SignOut, SignUp, UpdatePassword, UpdateProfile } from '../commands';
@@ -63,7 +62,7 @@ export class AuthController extends AbstractController {
   @Patch('me/update')
   @ApiOperation({ summary: 'Update the current user profile' })
   @ApiOkResponse({ type: UserResponse, description: 'Profile updated' })
-  updateProfile(@CurrentUser() user: User, @Body() dto: UpdateUserDto): Promise<IUserResponse> {
+  updateProfile(@CurrentUser() user: User, @Body() dto: UpdateProfileDto): Promise<IUserResponse> {
     return this.commandHandler.execute(new UpdateProfile(user, dto));
   }
 

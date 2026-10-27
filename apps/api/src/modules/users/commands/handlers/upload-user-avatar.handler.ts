@@ -1,6 +1,7 @@
 import { BadRequestException, Logger, NotFoundException } from '@nestjs/common';
 import { CommandHandler, ICommandHandler, QueryBus } from '@nestjs/cqrs';
 import { promises } from 'fs';
+import { basename } from 'node:path';
 import { getUploadsPath } from '@api/shared/config';
 import { IUserResponse } from '../../interfaces';
 import { UploadUserAvatar } from '../impl';
@@ -21,24 +22,59 @@ export class UploadUserAvatarHandler implements ICommandHandler<UploadUserAvatar
 
   async execute(command: UploadUserAvatar): Promise<IUserResponse> {
     const { userId, file } = command;
+    if (!file?.filename) throw new BadRequestException('Image requise');
+
+    let avatarSaved = false;
 
     try {
-      const user = await this.queryBus.execute(new FindUserById(userId));
+      if (!userId) throw new NotFoundException('Utilisateur introuvable');
 
-      if (user.avatar) {
-        await promises.rm(getUploadsPath('profiles', user.avatar), { force: true });
-      }
+      const previousAvatar = await this.repository.manager.transaction(async (manager) => {
+        const repository = manager.getRepository(User);
+        const user = await repository.findOne({
+          where: { id: userId },
+          lock: { mode: 'pessimistic_write' }
+        });
 
-      await this.repository.update(user.id, { avatar: file.filename });
+        if (!user) throw new NotFoundException('Utilisateur introuvable');
 
-      return await this.queryBus.execute(new FindUserById(user.id));
+        await repository.update(user.id, { avatar: file.filename });
+        return user.avatar;
+      });
+      avatarSaved = true;
+
+      if (previousAvatar !== file.filename) await this.removeLocalAvatar(previousAvatar);
+
+      return await this.queryBus.execute(new FindUserById(userId));
     } catch (error) {
+      if (!avatarSaved) await this.removeLocalAvatar(file.filename);
+
       if (error instanceof NotFoundException) throw error;
 
       this.logger.error(
         `Upload user avatar failed id="${userId}": ${error instanceof Error ? error.message : String(error)}`
       );
       throw new BadRequestException("Ajout d'image impossible");
+    }
+  }
+
+  private async removeLocalAvatar(filename: string): Promise<void> {
+    if (
+      !filename ||
+      filename === '.' ||
+      filename === '..' ||
+      basename(filename) !== filename ||
+      filename.includes('\\')
+    ) {
+      return;
+    }
+
+    try {
+      await promises.rm(getUploadsPath('profiles', filename), { force: true });
+    } catch (error) {
+      this.logger.warn(
+        `Avatar cleanup failed file="${filename}": ${error instanceof Error ? error.message : String(error)}`
+      );
     }
   }
 }

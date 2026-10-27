@@ -22,7 +22,9 @@ export class UpdateUserHandler implements ICommandHandler<UpdateUser, IUserRespo
     const { email, name, password, avatar, roles } = command.updateUserDto;
 
     try {
-      const user = await this.repository.findOneOrFail({ where: { email } });
+      if (!command.id) throw new BadRequestException('Utilisateur introuvable');
+
+      const user = await this.repository.findOneOrFail({ where: { id: command.id } });
 
       const newUser = this.repository.merge(user, {
         email,
@@ -34,7 +36,7 @@ export class UpdateUserHandler implements ICommandHandler<UpdateUser, IUserRespo
 
       const updatedUser = await this.repository.save(newUser);
 
-      return this.queryBus.execute(new FindUserById(updatedUser.id));
+      return await this.queryBus.execute(new FindUserById(updatedUser.id));
     } catch (error) {
       this.logger.error(
         `Update user failed id="${command.id}": ${error instanceof Error ? error.message : String(error)}`

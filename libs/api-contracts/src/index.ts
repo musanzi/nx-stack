@@ -10,6 +10,7 @@ export type ISignInDto = components['schemas']['SignInDto'];
 export type ISignUpDto = components['schemas']['SignUpDto'];
 export type IStatItem = components['schemas']['StatItem'];
 export type IUpdatePasswordDto = components['schemas']['UpdatePasswordDto'];
+export type IUpdateProfileDto = components['schemas']['UpdateProfileDto'];
 export type IUpdateRoleDto = components['schemas']['UpdateRoleDto'];
 export type IUpdateUserDto = components['schemas']['UpdateUserDto'];
 export type IUserResponse = components['schemas']['UserResponse'];

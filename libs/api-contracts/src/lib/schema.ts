@@ -395,7 +395,7 @@ export interface components {
             /** @example secret123 */
             password: string;
         };
-        UpdateUserDto: {
+        UpdateProfileDto: {
             /**
              * Format: email
              * @example john.doe@example.com
@@ -403,16 +403,6 @@ export interface components {
             email?: string;
             /** @example John Doe */
             name?: string;
-            /** @example newSecret123 */
-            password?: string;
-            /** @example https://example.com/avatar.png */
-            avatar?: string;
-            /**
-             * @example [
-             *       "b7f2c1e0-4a5d-4c8e-9f1a-2b3c4d5e6f7a"
-             *     ]
-             */
-            roles?: string[];
         };
         UpdatePasswordDto: {
             /** @example newSecret123 */
@@ -440,6 +430,25 @@ export interface components {
             /** @example John Doe */
             name: string;
             /** @example secret123 */
+            password?: string;
+            /** @example https://example.com/avatar.png */
+            avatar?: string;
+            /**
+             * @example [
+             *       "b7f2c1e0-4a5d-4c8e-9f1a-2b3c4d5e6f7a"
+             *     ]
+             */
+            roles?: string[];
+        };
+        UpdateUserDto: {
+            /**
+             * Format: email
+             * @example john.doe@example.com
+             */
+            email?: string;
+            /** @example John Doe */
+            name?: string;
+            /** @example newSecret123 */
             password?: string;
             /** @example https://example.com/avatar.png */
             avatar?: string;
@@ -770,7 +779,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["UpdateUserDto"];
+                "application/json": components["schemas"]["UpdateProfileDto"];
             };
         };
         responses: {
