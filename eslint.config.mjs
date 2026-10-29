@@ -10,7 +10,7 @@ export default defineConfig(
   globalIgnores(['.angular/', '.nx/', 'dist/', 'out-tsc/', 'coverage/', 'libs/api-contracts/src/lib/']),
 
   {
-    files: ['**/*.{js,mjs,cjs,ts}'],
+    files: ['**/*.{js,mjs,cjs,ts,mts}'],
     extends: [eslint.configs.recommended],
     languageOptions: {
       globals: globals.node
@@ -18,7 +18,7 @@ export default defineConfig(
   },
 
   {
-    files: ['**/*.ts'],
+    files: ['**/*.{ts,mts}'],
     extends: [tseslint.configs.recommended]
   },
 

@@ -20,7 +20,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        task: [lint, build]
+        task: [lint, typecheck, test, build]
     env:
       HUSKY: '0'
       NX_DAEMON: 'false'

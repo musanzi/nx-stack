@@ -88,12 +88,28 @@ pnpm dev
 
 `pnpm typecheck` checks both apps and shared contracts. In Docker, run pnpm commands through `docker compose -f compose.dev.yml exec api` or `docker compose -f compose.dev.yml exec web`. Database commands build the API first.
 
+## API unit tests
+
+Install the locked dependencies with `pnpm install --frozen-lockfile`. Tests run without a database, Redis, SMTP, an HTTP server, or a private environment file.
+
+| Command                                     | Purpose                                |
+| ------------------------------------------- | -------------------------------------- |
+| `pnpm test` or `pnpm test:api`              | Run the API unit suite once            |
+| `pnpm test:api:watch`                       | Rerun tests while editing              |
+| `pnpm test:api --args=validate-credentials` | Run specs whose paths match the filter |
+| `pnpm typecheck:api:tests`                  | Check test, fixture, and runner types  |
+
+`pnpm typecheck` also checks API specs. CI runs lint, type checks, unit tests, and builds.
+There is no initial numeric coverage threshold. Add tests for observable business decisions, transformations, errors, and consequential side effects.
+
+See [API unit testing](docs/api-unit-testing.md) for test boundaries, examples, and the runner configuration.
+
 ## Maintenance and deployment
 
 - Follow [AGENTS.md](AGENTS.md). API modules use CQRS and expose their own queries and commands. Web code separates data access, features, interfaces, and presentational UI.
 - After API changes, run `pnpm generate:api`. The command builds the API and exports `libs/api-contracts/openapi.json` in Nest preview mode, then generates the shared types. It does not need a running API, database, Redis, or SMTP server. The web app's build, serve, and typecheck targets run these steps automatically. Set `OPENAPI_INPUT` to use another schema URL or a local JSON or YAML file.
 - Import types from `@nx-stack/api-contracts` and commit the OpenAPI document and generated types. Never edit generated files manually.
-- Run `pnpm lint`, `pnpm typecheck`, and `pnpm build` before committing application changes. Git hooks run linting and enforce Conventional Commit messages; GitHub Actions checks lint and build.
+- Run `pnpm lint`, `pnpm typecheck`, `pnpm test`, and `pnpm build` before committing application changes. Git hooks run linting and enforce Conventional Commit messages; GitHub Actions runs these four checks.
 - When adapting the starter, update the branding and the web app's API URLs in `apps/web/src/environments`. Production currently targets `https://api.nx-stack.com`. Before deployment, configure real secrets, Google OAuth, SMTP, `MAIL_FROM`, and `FRONTEND_URI`. Keep `.env` private.
 
 ```sh

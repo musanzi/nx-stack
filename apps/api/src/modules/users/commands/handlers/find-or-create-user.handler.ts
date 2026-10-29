@@ -26,7 +26,7 @@ export class FindOrCreateUserHandler implements ICommandHandler<FindOrCreateUser
       });
 
       if (existingUser) {
-        return this.commandBus.execute(
+        return await this.commandBus.execute(
           new UpdateUser(existingUser.id, {
             email,
             name,

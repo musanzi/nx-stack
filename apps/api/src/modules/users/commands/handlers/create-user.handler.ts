@@ -26,7 +26,7 @@ export class CreateUserHandler implements ICommandHandler<CreateUser, IUserRespo
     const { email, name, password: suppliedPassword, avatar, roles } = command.createUserDto;
     const hasPassword = Boolean(suppliedPassword);
     const generatedPassword = hasPassword ? undefined : randomInt(0, 1_000_000).toString().padStart(6, '0');
-    const password = suppliedPassword ?? generatedPassword;
+    const password = hasPassword ? suppliedPassword : generatedPassword;
 
     try {
       const userRoles = roles ? mapRoleIds(roles) : [await this.queryBus.execute(new FindRoleByName('user'))];
