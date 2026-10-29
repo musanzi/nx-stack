@@ -1,6 +1,6 @@
 # nx-stack
 
-nx-stack is an Angular and NestJS starter with public pages, authentication, profile management, and an administration dashboard for users, roles, and statistics. The apps share API types and run in Docker for development and production.
+nx-stack is an Angular and NestJS starter with public pages, authentication, and profile management. Its administration dashboard manages users and roles and displays statistics. The apps share API types and run in Docker for development and production.
 
 ## Stack and structure
 
@@ -16,13 +16,13 @@ Authentication uses JWT, Redis-backed sessions, and Google sign-in. The API send
 
 ## Getting started
 
-Use Docker Compose to run the development environment. To run the apps on your host, install Node.js 24.15+ and pnpm 12.11.2. The pnpm version is pinned in `package.json`. Run commands from the repository root.
+Use Docker Compose to run the development environment. To run the apps on your host, install Node.js 24.15+ and pnpm 12.11.2. The `package.json` file pins the pnpm version. Run commands from the repository root.
 
 ```sh
 cp -n .env.example .env
 ```
 
-Keep the database credentials from `.env.example`. Set these values in `.env`, including `REDIS_URL`, which the example omits:
+Keep the database credentials from `.env.example`. Add or update these values in `.env`. The example omits `REDIS_URL`.
 
 ```dotenv
 API_PORT=8000
@@ -40,7 +40,7 @@ GOOGLE_REDIRECT_URI=http://localhost:8000/auth/google/redirect
 FRONTEND_URI=http://localhost:4200
 ```
 
-These Google OAuth placeholders allow local startup. To use Google sign-in, replace them with real credentials. Leave SMTP credentials empty for MailHog.
+The Google OAuth placeholders let the API start locally. To use Google sign-in, replace them with real credentials. Leave SMTP credentials empty for MailHog.
 
 ```sh
 docker compose -f compose.dev.yml up -d --build
@@ -62,7 +62,7 @@ Run the seed only with development data. Each run resets these accounts' passwor
 
 ### Running on the host
 
-Run PostgreSQL and Redis locally, and provide an SMTP server. Configure the database through `DB_*` in `.env`. Set `DB_HOST=localhost`, `REDIS_URL=redis://localhost:6379`, and your SMTP host and port. The supplied Compose files do not publish PostgreSQL or Redis ports to the host.
+Run PostgreSQL and Redis locally, and provide an SMTP server. Configure the database through the `DB_*` variables in `.env`. Set `DB_HOST=localhost` and `REDIS_URL=redis://localhost:6379`. Set `MAIL_HOST` and `MAIL_PORT` to your SMTP server's host and port. The supplied Compose files do not publish PostgreSQL or Redis ports to the host.
 
 ```sh
 corepack enable
@@ -86,7 +86,7 @@ pnpm dev
 | `pnpm generate:api`                               | Regenerate contracts from the API source        |
 | `pnpm sync:api`                                   | Regenerate contracts and build the web app      |
 
-`pnpm typecheck` checks both apps and shared contracts. In Docker, run pnpm commands through `docker compose -f compose.dev.yml exec api` or `docker compose -f compose.dev.yml exec web`. Database commands build the API first.
+`pnpm typecheck` checks both apps and shared contracts. To run a pnpm command in Docker, prefix it with `docker compose -f compose.dev.yml exec api` or `docker compose -f compose.dev.yml exec web`. Database commands build the API first.
 
 ## API unit tests
 
@@ -99,18 +99,41 @@ Install the locked dependencies with `pnpm install --frozen-lockfile`. Tests run
 | `pnpm test:api --args=validate-credentials` | Run specs whose paths match the filter |
 | `pnpm typecheck:api:tests`                  | Check test, fixture, and runner types  |
 
+After API behavior changes, run `pnpm test:api` and `pnpm typecheck:api:tests`.
 `pnpm typecheck` also checks API specs. CI runs lint, type checks, unit tests, and builds.
-There is no initial numeric coverage threshold. Add tests for observable business decisions, transformations, errors, and consequential side effects.
+
+Place `*.spec.ts` files beside the API code under test and import Vitest functions explicitly.
+Use Nest testing modules for dependency-injected providers and call exported helpers directly.
+Mock infrastructure dependencies, such as repositories, mail, and filesystem operations. Keep business logic under test.
+
+Test observable business decisions, transformations, errors, and consequential side effects.
+Check that rejected operations do not write data, publish events, or delete files.
+Add regression tests for bug fixes. Skip construction-only tests and straightforward forwarding.
+There is no numeric coverage threshold.
 
 See [API unit testing](docs/api-unit-testing.md) for test boundaries, examples, and the runner configuration.
+
+## Coding agents
+
+This repository uses [Matt Pocock's skills](https://github.com/mattpocock/skills) for coding-agent workflows.
+Follow the skills' installation instructions for your agent. Read [AGENTS.md](AGENTS.md) for this repository's conventions and required checks.
+
+Read the relevant guide before you start a task:
+
+- [Issue tracker](docs/agents/issue-tracker.md) explains how to work with issues and specs in GitHub Issues for `musanzi/nx-stack`.
+- [Triage labels](docs/agents/triage-labels.md) lists the labels to use when triaging issues.
+- [Domain docs](docs/agents/domain.md) specifies where to keep the shared glossary and architectural decision records.
+
+Use the installed skill that matches your task. Examples include `tdd` for test-first development, `diagnosing-bugs` for debugging, and `code-review` for reviewing changes.
+For frontend implementation, use the `angular-developer` skill required by `AGENTS.md`.
 
 ## Maintenance and deployment
 
 - Follow [AGENTS.md](AGENTS.md). API modules use CQRS and expose their own queries and commands. Web code separates data access, features, interfaces, and presentational UI.
-- After API changes, run `pnpm generate:api`. The command builds the API and exports `libs/api-contracts/openapi.json` in Nest preview mode, then generates the shared types. It does not need a running API, database, Redis, or SMTP server. The web app's build, serve, and typecheck targets run these steps automatically. Set `OPENAPI_INPUT` to use another schema URL or a local JSON or YAML file.
+- After API changes, run `pnpm generate:api`. The command builds the API, exports `libs/api-contracts/openapi.json` in Nest preview mode, and generates the shared types. It does not need a running API, database, Redis, or SMTP server. The web app's build, serve, and typecheck targets also run these steps. To use another schema, set `OPENAPI_INPUT` to a schema URL or a local JSON or YAML file.
 - Import types from `@nx-stack/api-contracts` and commit the OpenAPI document and generated types. Never edit generated files manually.
-- Run `pnpm lint`, `pnpm typecheck`, `pnpm test`, and `pnpm build` before committing application changes. Git hooks run linting and enforce Conventional Commit messages; GitHub Actions runs these four checks.
-- When adapting the starter, update the branding and the web app's API URLs in `apps/web/src/environments`. Production currently targets `https://api.nx-stack.com`. Before deployment, configure real secrets, Google OAuth, SMTP, `MAIL_FROM`, and `FRONTEND_URI`. Keep `.env` private.
+- Before you commit application changes, run `pnpm lint`, `pnpm typecheck`, `pnpm test`, and `pnpm build`. Git hooks run linting and enforce Conventional Commit messages. GitHub Actions runs the same four checks.
+- When you adapt the starter, update its branding. Set the web app's API URLs in `apps/web/src/environments`. The production configuration uses `https://api.nx-stack.com`. Before deployment, configure real secrets, Google OAuth, SMTP, `MAIL_FROM`, and `FRONTEND_URI`. Keep `.env` private.
 
 ```sh
 docker compose -f compose.prod.yml up -d --build

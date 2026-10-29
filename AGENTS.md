@@ -26,6 +26,17 @@ Use Node.js 24.x and pnpm 12.11.2. Run these commands from the repository root.
 
 For Docker setup and required services, follow [README.md](README.md).
 
+## API testing
+
+Before adding or changing API tests, read [API unit testing](docs/api-unit-testing.md) for test boundaries and examples.
+
+- Run `pnpm test:api` after API behavior changes. The unit suite requires no environment file or running services.
+- Run `pnpm test:api:watch` while editing, or `pnpm test:api --args=validate-credentials` to filter specs by path.
+- Run `pnpm typecheck:api:tests` to check specs, fixtures, and runner configuration. `pnpm typecheck` also includes this check.
+- Place `*.spec.ts` files beside the code under test and import Vitest functions explicitly. Use Nest testing modules for dependency-injected providers and call exported helpers directly.
+- Test observable outcomes and consequential side effects, including effects that must not occur after failure. Mock infrastructure dependencies and keep business logic under test.
+- Add regression tests for bug fixes. Skip construction-only tests and straightforward forwarding. No numeric coverage threshold applies.
+
 ## Code style and naming
 
 Use TypeScript with two-space indentation, single quotes, semicolons, a 120-character line width, and no trailing commas.
@@ -38,7 +49,7 @@ For frontend implementation, use the `angular-developer` skill.
 ## Commits and pull requests
 
 Use Conventional Commits, such as `feat:`, `fix(users):`, `docs:`, or `chore:`. Commitlint enforces this format.
-The pre-commit hook runs lint. CI runs lint and build.
+The pre-commit hook runs lint. CI runs lint, type checks, API unit tests, and builds.
 
 In each PR, explain the behavior change, link related issues, and list the checks you ran. Include screenshots for visible UI changes. Describe any migration or configuration changes.
 
