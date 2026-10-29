@@ -57,4 +57,4 @@ Read the relevant document before you start the task.
 
 - Before issue operations, read [Issue tracker](docs/agents/issue-tracker.md). Issues and specs live in GitHub Issues for `musanzi/nx-stack`.
 - Before you triage issues, read [Triage labels](docs/agents/triage-labels.md). Use the five default labels defined there.
-- Before you explore the codebase, read [Domain docs](docs/agents/domain.md).
+- Before you explore the codebase, read [Domain docs](docs/agents/domain.md). Use one shared domain context, with `GLOSSARY.md` [Domain context](GLOSSARY.md) at the repository root and architectural decision records in `docs/adr/`.
