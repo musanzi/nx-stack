@@ -111,8 +111,6 @@ Check that rejected operations do not write data, publish events, or delete file
 Add regression tests for bug fixes. Skip construction-only tests and straightforward forwarding.
 There is no numeric coverage threshold.
 
-See [API unit testing](docs/api-unit-testing.md) for test boundaries, examples, and the runner configuration.
-
 ## Coding agents
 
 This repository uses [Matt Pocock's skills](https://github.com/mattpocock/skills) for coding-agent workflows.

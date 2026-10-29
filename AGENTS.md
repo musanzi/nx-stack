@@ -28,8 +28,6 @@ For Docker setup and required services, follow [README.md](README.md).
 
 ## API testing
 
-Before adding or changing API tests, read [API unit testing](docs/api-unit-testing.md) for test boundaries and examples.
-
 - Run `pnpm test:api` after API behavior changes. The unit suite requires no environment file or running services.
 - Run `pnpm test:api:watch` while editing, or `pnpm test:api --args=validate-credentials` to filter specs by path.
 - Run `pnpm typecheck:api:tests` to check specs, fixtures, and runner configuration. `pnpm typecheck` also includes this check.
