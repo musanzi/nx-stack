@@ -8,8 +8,6 @@ services:
     env_file: ./.env
     environment:
       UPLOADS_DIR: /app/apps/api/uploads
-    networks:
-      - nx-stack
     ports:
       - ${API_PORT:-8000}:${API_PORT}
     volumes:
@@ -25,15 +23,11 @@ services:
       target: web-production
     restart: unless-stopped
     env_file: ./.env
-    networks:
-      - nx-stack
     ports:
       - ${WEB_PORT:-4200}:${WEB_PORT}
   db:
     image: postgres:18-alpine
     restart: unless-stopped
-    networks:
-      - nx-stack
     environment:
       POSTGRES_USER: ${DB_USERNAME:?DB_USERNAME is required}
       POSTGRES_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
@@ -48,8 +42,6 @@ services:
   redis:
     image: redis:8-alpine
     restart: unless-stopped
-    networks:
-      - nx-stack
     command: redis-server --appendonly yes
     volumes:
       - redis_data:/data
@@ -58,10 +50,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-networks:
-  nx-stack:
-    name: nx-stack
-    driver: bridge
 volumes:
   postgres_data:
   redis_data:
