@@ -9,7 +9,7 @@ services:
     environment:
       UPLOADS_DIR: /app/apps/api/uploads
     ports:
-      - ${API_PORT:-8000}:${API_PORT}
+      - ${API_PORT}:${API_PORT}
     volumes:
       - ./apps/api/src/modules/database/migrations:/app/apps/api/src/modules/database/migrations
       - uploads_data:/app/apps/api/uploads
@@ -35,7 +35,7 @@ services:
     restart: unless-stopped
     env_file: ./.env
     ports:
-      - ${WEB_PORT:-4200}:${WEB_PORT}
+      - ${WEB_PORT}:${WEB_PORT}
     develop:
       watch:
         - action: sync
