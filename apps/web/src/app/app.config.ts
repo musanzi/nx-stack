@@ -50,6 +50,7 @@ export const appConfig: ApplicationConfig = {
     provideIcons(),
     provideTheming({
       primary: '#006da4',
+      secondary: '#c2410c',
       error: '#dc2626'
     })
   ]

@@ -48,6 +48,9 @@ export class Theming {
       --theme-color-primary-900: ${primary.hue(900)};
       --theme-color-primary-950: ${primary.hue(950)};
 
+      /* Secondary */
+      --theme-color-secondary: ${config.secondary};
+
       /* Error */
       --theme-color-error-50: ${error.hue(50)};
       --theme-color-error-100: ${error.hue(100)};
@@ -60,7 +63,7 @@ export class Theming {
       --theme-color-error-800: ${error.hue(800)};
       --theme-color-error-900: ${error.hue(900)};
       --theme-color-error-950: ${error.hue(950)};
-    `;
+    }`;
 
     return {
       primary,
