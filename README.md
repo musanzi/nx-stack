@@ -111,20 +111,6 @@ Check that rejected operations do not write data, publish events, or delete file
 Add regression tests for bug fixes. Skip construction-only tests and straightforward forwarding.
 There is no numeric coverage threshold.
 
-## Coding agents
-
-This repository uses [Matt Pocock's skills](https://github.com/mattpocock/skills) for coding-agent workflows.
-Follow the skills' installation instructions for your agent. Read [AGENTS.md](AGENTS.md) for this repository's conventions and required checks.
-
-Read the relevant guide before you start a task:
-
-- [Issue tracker](docs/agents/issue-tracker.md) explains how to work with issues and specs in GitHub Issues for `musanzi/nx-stack`.
-- [Triage labels](docs/agents/triage-labels.md) lists the labels to use when triaging issues.
-- [Domain docs](docs/agents/domain.md) specifies where to keep the shared glossary and architectural decision records.
-
-Use the installed skill that matches your task. Examples include `tdd` for test-first development, `diagnosing-bugs` for debugging, and `code-review` for reviewing changes.
-For frontend implementation, use the `angular-developer` skill required by `AGENTS.md`.
-
 ## Maintenance and deployment
 
 - Follow [AGENTS.md](AGENTS.md). API modules use CQRS and expose their own queries and commands. Web code separates data access, features, interfaces, and presentational UI.
