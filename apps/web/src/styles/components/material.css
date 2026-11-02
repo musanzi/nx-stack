@@ -1,12 +1,4 @@
 #nx-stack-web {
-  .admin-side-panel {
-    --mat-dialog-container-shape: 0;
-
-    .mat-mdc-dialog-surface {
-      overflow: hidden;
-    }
-  }
-
   /* ------------------------------------------------------------------------ */
   /* Typography                                                               */
   /* ------------------------------------------------------------------------ */
@@ -241,13 +233,13 @@
   /* ------------------------------------------------------------------------ */
   /* Button                                                                   */
   /* ------------------------------------------------------------------------ */
-  --mat-button-text-container-shape: 0.5rem;
+  --mat-button-text-container-shape: 0.75rem;
   --mat-button-text-container-height: 2.5rem;
   --mat-button-text-horizontal-padding: 0.75rem;
   --mat-button-text-with-icon-horizontal-padding: 0.75rem;
   --mat-button-text-icon-offset: 0rem;
 
-  --mat-button-outlined-container-shape: 0.5rem;
+  --mat-button-outlined-container-shape: 0.75rem;
   --mat-button-outlined-container-height: 2.5rem;
   --mat-button-outlined-horizontal-padding: 0.75rem;
   --mat-button-outlined-icon-offset: 0rem;
@@ -255,17 +247,17 @@
   --mat-button-outlined-state-layer-color: var(--color-primary-600);
   --mat-button-outlined-ripple-color: color-mix(in oklch, var(--color-primary-600) 10%, transparent);
 
-  --mat-button-tonal-container-shape: 0.5rem;
+  --mat-button-tonal-container-shape: 0.75rem;
   --mat-button-tonal-container-height: 2.5rem;
   --mat-button-tonal-horizontal-padding: 0.75rem;
   --mat-button-tonal-icon-offset: 0rem;
 
-  --mat-button-filled-container-shape: 0.5rem;
+  --mat-button-filled-container-shape: 0.75rem;
   --mat-button-filled-container-height: 2.5rem;
   --mat-button-filled-horizontal-padding: 0.75rem;
   --mat-button-filled-icon-offset: 0rem;
 
-  --mat-button-protected-container-shape: 0.5rem;
+  --mat-button-protected-container-shape: 0.75rem;
   --mat-button-protected-container-height: 2.5rem;
   --mat-button-protected-horizontal-padding: 0.75rem;
   --mat-button-protected-icon-offset: 0rem;
@@ -314,7 +306,7 @@
       height: auto;
       max-width: 100%;
       padding-block: 0.5rem;
-      border-radius: 0.375rem;
+      border-radius: 0.75rem;
       line-height: 1.25rem;
       white-space: normal;
 
@@ -369,7 +361,7 @@
     height: auto;
     min-height: 2.5rem;
     max-width: 100%;
-    border-radius: 0.375rem;
+    border-radius: 0.75rem;
     white-space: normal;
   }
 
@@ -457,9 +449,7 @@
 
   .event-status,
   .catalog-status,
-  .team-status,
-  .participation-status,
-  .reminder-status {
+  .attendance-status {
     --status-color: var(--color-neutral-600);
     --status-background: var(--color-neutral-100);
     --status-border: var(--color-neutral-200);
@@ -479,12 +469,9 @@
 
   .event-status[data-status='active'],
   .catalog-status[data-status='active'],
-  .team-status[data-status='active'],
-  .participation-status[data-status='active'],
-  .participation-status[data-status='APPROVED'],
-  .participation-status[data-status='PARTIALLY_APPROVED'],
-  .reminder-status[data-status='delivered'],
-  .reminder-status[data-status='complete'] {
+  .attendance-status[data-status='active'],
+  .attendance-status[data-status='APPROVED'],
+  .attendance-status[data-status='PARTIALLY_APPROVED'] {
     --status-color: var(--color-emerald-700);
     --status-background: var(--color-emerald-50);
     --status-border: var(--color-emerald-200);
@@ -496,23 +483,20 @@
     --status-border: var(--color-sky-200);
   }
 
-  .participation-status[data-status='PENDING'],
-  .reminder-status[data-status='incomplete'] {
+  .attendance-status[data-status='PENDING'] {
     --status-color: var(--color-amber-800);
     --status-background: var(--color-amber-50);
     --status-border: var(--color-amber-200);
   }
 
-  .participation-status[data-status='REJECTED'] {
+  .attendance-status[data-status='REJECTED'] {
     --status-color: var(--color-red-700);
     --status-background: var(--color-red-50);
     --status-border: var(--color-red-200);
   }
 
   .event-status[data-status='unscheduled'],
-  .catalog-status[data-status='inactive'],
-  .team-status[data-status='inactive'],
-  .reminder-status[data-status='pending'] {
+  .catalog-status[data-status='inactive'] {
     --status-background: var(--color-white);
   }
 
@@ -530,28 +514,6 @@
         border-left-width: 0.09375rem;
         border-bottom-width: 0.09375rem;
       }
-    }
-  }
-
-  /* ------------------------------------------------------------------------ */
-  /* Dialog                                                                   */
-  /* ------------------------------------------------------------------------ */
-  --mat-dialog-container-shape: 0.375rem;
-  --mat-dialog-container-color: var(--color-white);
-
-  .mat-mdc-dialog-container {
-    --color-surface: var(--color-white);
-    --mat-sys-surface: var(--color-white);
-  }
-
-  .mat-mdc-dialog-surface {
-    overflow: hidden;
-
-    > section,
-    > .mat-mdc-dialog-component-host,
-    > .mat-mdc-dialog-component-host > section {
-      min-height: 0;
-      max-height: inherit;
     }
   }
 
@@ -575,6 +537,23 @@
   /* Dialog                                                                   */
   /* ------------------------------------------------------------------------ */
   --mat-dialog-container-shape: 1rem;
+  --mat-dialog-container-color: var(--color-white);
+
+  .mat-mdc-dialog-container {
+    --color-surface: var(--color-white);
+    --mat-sys-surface: var(--color-white);
+  }
+
+  .mat-mdc-dialog-surface {
+    overflow: hidden;
+
+    > section,
+    > .mat-mdc-dialog-component-host,
+    > .mat-mdc-dialog-component-host > section {
+      min-height: 0;
+      max-height: inherit;
+    }
+  }
 
   /* ------------------------------------------------------------------------ */
   /* Divider                                                                  */
@@ -903,7 +882,7 @@
     --form-field-subscript-letter-spacing: var(--tracking-normal);
 
     /* Size */
-    --form-field-border-radius: 0.5rem; /* 8px */
+    --form-field-border-radius: 0.75rem; /* 12px */
     --form-field-margin-top: 1.5rem; /* 24px */
     --form-field-padding-y: 0.625rem; /* 10px */
     --form-field-padding-x: 1rem; /* 16px */
@@ -1064,7 +1043,7 @@
   /* ------------------------------------------------------------------------ */
   --mat-sidenav-container-background-color: var(--color-neutral-100);
   --mat-sidenav-sidenav-background-color: var(--color-neutral-100);
-  --mat-sidenav-content-background-color: var(--color-white);
+  --mat-sidenav-content-background-color: var(--color-neutral-100);
 
   --mat-sidenav-container-text-color: var(--color-neutral-950);
 
@@ -1142,6 +1121,101 @@
     --mat-stepper-header-done-state-icon-foreground-color: var(--color-white);
     --mat-stepper-header-edit-state-icon-background-color: var(--color-emerald-600);
     --mat-stepper-header-edit-state-icon-foreground-color: var(--color-white);
+
+    [matStepperNext],
+    [matStepperPrevious] {
+      --mat-button-filled-icon-spacing: 0.25rem;
+      --mat-button-outlined-icon-spacing: 0.25rem;
+    }
+  }
+
+  /* Keep exhibitor preparation usable on phones without changing admin layouts. */
+  @media (width < 1024px) {
+    exhibitor-layout,
+    .exhibitor-dialog {
+      .admin-action,
+      .mat-mdc-icon-button,
+      .mat-button-toggle-button {
+        min-height: 2.75rem;
+      }
+
+      .mat-mdc-icon-button {
+        min-width: 2.75rem;
+      }
+
+      input.mat-mdc-input-element,
+      textarea.mat-mdc-input-element {
+        font-size: 16px;
+      }
+
+      .mat-mdc-paginator-container {
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.75rem;
+      }
+
+      .mat-mdc-paginator-range-label {
+        margin-inline: 0.5rem;
+      }
+
+      .mat-mdc-paginator-range-actions {
+        min-width: 0;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+
+    exhibitor-layout {
+      .navigation-item {
+        min-height: 2.75rem;
+      }
+
+      .mat-step-label {
+        white-space: normal;
+        overflow-wrap: anywhere;
+      }
+
+      .mat-vertical-stepper-header {
+        padding: 1rem;
+      }
+
+      .mat-vertical-content-container {
+        margin-inline-start: 1.75rem;
+      }
+
+      .mat-vertical-content {
+        padding: 0 0.75rem 1rem;
+      }
+
+      .mat-expansion-panel-body {
+        padding-inline: 0.75rem;
+      }
+    }
+
+    .exhibitor-dialog {
+      --mat-tab-container-height: 2.75rem;
+
+      .mat-mdc-dialog-container header > h2 {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .mat-mdc-dialog-container header > button {
+        flex-shrink: 0;
+      }
+
+      .mat-mdc-dialog-container footer > .admin-action {
+        flex: 1 1 auto;
+      }
+    }
+  }
+
+  @media (width < 640px) {
+    exhibitor-layout .mat-mdc-paginator-range-label {
+      width: 100%;
+      margin: 0 0 0.5rem;
+      text-align: center;
+    }
   }
 
   /* ------------------------------------------------------------------------ */
@@ -1149,6 +1223,26 @@
   /* ------------------------------------------------------------------------ */
   --mat-table-background-color: transparent;
   --mat-table-row-item-outline-color: var(--color-neutral-200);
+
+  .mat-mdc-table {
+    --mat-table-header-headline-size: var(--text-md);
+    --mat-table-header-headline-weight: var(--font-weight-semibold);
+    --mat-table-header-headline-color: var(--color-neutral-500);
+    --mat-table-row-item-label-text-size: var(--text-md);
+    --mat-table-row-item-label-text-color: var(--color-neutral-800);
+    --mat-table-header-container-height: 3rem;
+    --mat-table-row-item-container-height: 4rem;
+
+    .mat-mdc-header-cell {
+      background-color: var(--color-neutral-50);
+    }
+
+    .mat-mdc-cell,
+    .mat-mdc-header-cell {
+      padding-inline: 1.5rem;
+      border-bottom-color: var(--color-neutral-200);
+    }
+  }
 
   /* Restore the bottom border on last row */
   .mdc-data-table__row:last-child > .mat-mdc-cell {
