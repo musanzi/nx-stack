@@ -18,7 +18,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-      mailhog:
+      mailpit:
         condition: service_started
     develop:
       watch:
@@ -48,12 +48,20 @@ services:
           path: ./libs/api-contracts/src
           target: /app/libs/api-contracts/src
           initial_sync: true
-  mailhog:
-    image: mailhog/mailhog:v1.0.1
-    platform: linux/amd64
+  mailpit:
+    image: axllent/mailpit:latest
     restart: unless-stopped
+    environment:
+      MP_MAX_MESSAGES: 500
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
     ports:
       - '8025:8025'
+    healthcheck:
+      test: ['CMD', '/mailpit', 'readyz']
+      interval: 10s
+      timeout: 5s
+      retries: 5
   db:
     image: postgres:18-alpine
     restart: unless-stopped
